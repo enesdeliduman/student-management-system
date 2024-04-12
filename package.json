@@ -1,0 +1,37 @@
+{
+  "name": "student-management-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "devcss": "postcss ./public/css/tailwind.css -o ./public/css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enesdman0/student-management-system.git"
+  },
+  "keywords": [
+    "student",
+    "management"
+  ],
+  "author": "Enes Deliduman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enesdman0/student-management-system/issues"
+  },
+  "homepage": "https://github.com/enesdman0/student-management-system#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "rippleui": "^1.12.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}
