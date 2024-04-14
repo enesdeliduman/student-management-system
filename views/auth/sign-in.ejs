@@ -1,16 +1,19 @@
 <%- include('../partials/_head') -%>
 
-    <body class="bg-backgroundSecondary py-32 px-6">
+    <body class="bg-backgroundSecondary py-32 px-6 ">
         <div class="bg-backgroundPrimary p-12 rounded-3xl mx-auto flex w-full max-w-sm flex-col gap-6">
             <div class="form-group">
                 <div class="form-field">
-                    <label class="form-label">Kullanıcı adı</label>
-                    <input placeholder="Type here" type="email" class="input max-w-full" />
+                    <label for="username" class="form-label">Kullanıcı adı</label>
+                    <div class="form-control">
+                        <input id="username" placeholder="Type here" type="text" class="input max-w-full" />
+                    </div>
                 </div>
                 <div class="form-field">
-                    <label class="form-label">Şifre</label>
+                    <label for="password" class="form-label">Şifre</label>
                     <div class="form-control">
-                        <input placeholder="Type here" type="password" class="input max-w-full" />
+                        <input id="password" placeholder="Type here" name="password" type="password"
+                            class="input max-w-full" />
                     </div>
                 </div>
                 <div class="form-field pt-5">
@@ -20,6 +23,8 @@
                 </div>
             </div>
         </div>
+        <%- include('../partials/_footer') -%>
+        <%- include('../partials/_scripts') -%>
     </body>
 
     </html>
