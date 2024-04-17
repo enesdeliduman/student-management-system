@@ -1,11 +1,34 @@
 <%- include('../partials/_head') -%>
 
-    <body class="bg-backgroundSecondary py-32 px-6">
-        <div class="card bg-backgroundPrimary">
-            <div class="card-body">Hello World</div>
-        </div>
-        <%- include('../partials/_footer') -%>
-            <%- include('../partials/_scripts') -%>
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <div class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center">
+                <!-- Eklenen sm:flex ve sm:justify-center sınıfları -->
+                <div class="card bg-backgroundPrimary">
+                    <a href="#">
+                        <div class="card-body flex justify-between">
+                            <p>Öğretmenler</p>
+                            <p>12</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="card bg-backgroundPrimary">
+                    <div class="card-body flex justify-between">
+                        <p>Dersler</p>
+                        <p>12</p>
+                    </div>
+                </div>
+                <div class="card bg-backgroundPrimary">
+                    <a href="students">
+                        <div class="card-body flex justify-between">
+                            <p>Öğrenciler</p>
+                            <p>12</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
     </body>
 
     </html>

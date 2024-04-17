@@ -4,5 +4,7 @@ const router = express.Router()
 const userController = require("../controllers/userController")
 
 router.get("/", userController.index)
+router.get("/students", userController.students)
+router.get("/student/:no", userController.student)
 
 module.exports = router

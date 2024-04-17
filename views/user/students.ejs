@@ -1,0 +1,129 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <!-- Filter and Search -->
+            <div class="w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
+                <input type="text" class="input input-lg max-w-full pl-10" placeholder="İsim giriniz" />
+                <select class="select">
+                    <option>Seçiniz</option>
+                    <option>A - Z</option>
+                    <option>Başarı ortalaması (önce büyük)</option>
+                    <option>Başarı ortalaması (önce küçük)</option>
+                    <option>Doğum tarihi (önce büyük)</option>
+                    <option>Doğum tarihi (önce küçük)</option>
+                </select>
+            </div>
+            <!-- Table -->
+            <div class="flex min-w-full overflow-x-auto justify-center">
+                <table class="table-compact table max-w-8xl ">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Where</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>Cy Ganderton</td>
+                            <td>Quality Control Specialist</td>
+                            <td>Blue</td>
+                            <td>
+                                <div class="dropdown">
+                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
+                                            class="fa-solid fa-arrow-left"></i></label>
+                                    <div class="dropdown-menu dropdown-menu-left">
+                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
+                                            profili</a>
+                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>Hart Hagerty</td>
+                            <td>Desktop Support Technician</td>
+                            <td>Purple</td>
+                            <td>
+                                <div class="dropdown">
+                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
+                                            class="fa-solid fa-arrow-left"></i></label>
+                                    <div class="dropdown-menu dropdown-menu-left">
+                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
+                                            profili</a>
+                                        <a tabindex="-1" href="#" target="_blank" class="dropdown-item text-sm">Veli
+                                            bilgileri</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>Hart Hagerty</td>
+                            <td>Desktop Support Technician</td>
+                            <td>Purple</td>
+                            <td>
+                                <div class="dropdown">
+                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
+                                            class="fa-solid fa-arrow-left"></i></label>
+                                    <div class="dropdown-menu dropdown-menu-left">
+                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
+                                            profili</a>
+                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>Hart Hagerty</td>
+                            <td>Desktop Support Technician</td>
+                            <td>Purple</td>
+                            <td>
+                                <div class="dropdown">
+                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
+                                            class="fa-solid fa-arrow-left"></i></label>
+                                    <div class="dropdown-menu dropdown-menu-left">
+                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
+                                            profili</a>
+                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>Hart Hagerty</td>
+                            <td>Desktop Support Technician</td>
+                            <td>Purple</td>
+                            <td>
+                                <div class="dropdown">
+                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
+                                            class="fa-solid fa-arrow-left"></i></label>
+                                    <div class="dropdown-menu dropdown-menu-left">
+                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
+                                            profili</a>
+                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>

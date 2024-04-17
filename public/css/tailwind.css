@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
+
+.card:hover {
+    @apply bg-primary;
+    transition: 0.3s;
+    color: white
+}   
+body {
+    transition: background-color 0.2s;
+  }
 @tailwind utilities;
