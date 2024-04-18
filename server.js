@@ -3,24 +3,38 @@ const app = express();
 const ejs = require('ejs');
 const dotenv = require("dotenv")
 
-const routers = require("./routers/index");
-const { ErrorHandler } = require("./middlewares/ErrorHandler.js")
-
 dotenv.config({
     path: "./config/.env"
 })
 
+const routers = require("./routers/index");
+const { connectDB } = require('./data/databaseConnect.js');
+const { ErrorHandler } = require("./middlewares/ErrorHandler.js")
+const relationships = require("./data/modelsRelationships.js");
+const { createDummyData } = require("./data/dummyData.js");
+
 // Middleware
 app.use(express.json());
-
-// Routers
-app.use(routers)
-app.use(ErrorHandler)
 
 // EJS
 app.set('view engine', 'ejs');
 app.use('/views', express.static('views'))
 app.use('/public', express.static('public'))
+
+// Routers
+app.use(routers);
+
+// Error Handler Middleware
+app.use(ErrorHandler);
+
+
+
+// Veritabanı bağlantısı
+(async () => {
+    await connectDB();
+    await relationships();
+    await createDummyData();
+})();
 
 const PORT = process.env.PORT || 5000
 
