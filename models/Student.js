@@ -6,20 +6,9 @@ const Student = sequelize.define("student", {
         type: DataTypes.STRING,
         allowNull: false
     },
-    class: {
-        type: DataTypes.STRING
-    },
     photo: {
         type: DataTypes.STRING
     }
 });
 
 module.exports = Student;
-// x name
-// sınıf
-// ogretmen
-// dersler
-// notlar
-// ortalama
-// x Fotograf
-// Veli

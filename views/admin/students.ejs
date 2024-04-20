@@ -19,106 +19,43 @@
                 <table class="table-compact table max-w-8xl ">
                     <thead>
                         <tr>
-                            <th>Type</th>
-                            <th>Where</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Amount</th>
+                            <th></th>
+                            <th>Fotoğraf</th>
+                            <th>Numara</th>
+                            <th>Ad soyad</th>
+                            <th>Ayarlar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>
-                                <div class="dropdown">
-                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
-                                            class="fa-solid fa-arrow-left"></i></label>
-                                    <div class="dropdown-menu dropdown-menu-left">
-                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
-                                            profili</a>
-                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>
-                                <div class="dropdown">
-                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
-                                            class="fa-solid fa-arrow-left"></i></label>
-                                    <div class="dropdown-menu dropdown-menu-left">
-                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
-                                            profili</a>
-                                        <a tabindex="-1" href="#" target="_blank" class="dropdown-item text-sm">Veli
-                                            bilgileri</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>
-                                <div class="dropdown">
-                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
-                                            class="fa-solid fa-arrow-left"></i></label>
-                                    <div class="dropdown-menu dropdown-menu-left">
-                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
-                                            profili</a>
-                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>
-                                <div class="dropdown">
-                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
-                                            class="fa-solid fa-arrow-left"></i></label>
-                                    <div class="dropdown-menu dropdown-menu-left">
-                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
-                                            profili</a>
-                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>
-                                <div class="dropdown">
-                                    <label class="btn btn-solid-primary mx-2" tabindex="0"><i
-                                            class="fa-solid fa-arrow-left"></i></label>
-                                    <div class="dropdown-menu dropdown-menu-left">
-                                        <a tabindex="-1" href="student/23" target="_blank" class="dropdown-item text-sm">Öğrenci
-                                            profili</a>
-                                        <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli bilgileri</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-
+                        <% let count=0 %>
+                            <% students.forEach(student=> { %>
+                                <tr>
+                                    <td>
+                                        <%= ++count %>
+                                    </td>
+                                    <td><img class="max-w-[110px] h-auto rounded-lg" src="/uploads/<%= student.photo %>" alt="<%= student.fullName %>">
+                                    </td>
+                                    <td>
+                                        <%= student.id %>
+                                    </td>
+                                    <td>
+                                        <%= student.fullName %>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <label class="btn btn-solid-primary mx-2" tabindex="0"><i
+                                                    class="fa-solid fa-arrow-left"></i></label>
+                                            <div class="dropdown-menu dropdown-menu-left">
+                                                <a tabindex="-1" href="student/<%= student.id %>" target="_blank"
+                                                    class="dropdown-item text-sm">Öğrenci
+                                                    profili</a>
+                                                <a tabindex="-1" href="#" class="dropdown-item text-sm">Veli
+                                                    bilgileri</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }) %>
                     </tbody>
                 </table>
             </div>

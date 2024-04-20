@@ -2,95 +2,103 @@
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
-            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-start">
-                <!-- grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center -->
-                <div class="border rounded-lg p-4 overflow-x-auto">
-                    <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                        <img class="max-w-[150px] rounded-lg"
-                            src="https://yabancidiller.samsun.edu.tr/wp-content/uploads/sites/107/2023/04/VESIKALIK-RESIM.jpg"
-                            alt="">
-                        <div>
-                            <div class="flex space-x-2">
-                                <p>İsim soyisim:</p>
-                                <p class="text-md"><b>Merve Bahçıvanoğlu</b></p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <p>Numara:</p>
-                                <p class="text-md"><b>2</b></p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <p>Sınıf:</p>
-                                <p class="text-md"><b>12/A</b></p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <p>Sınıf öğretmeni:</p>
-                                <p class="text-md"><b>Erdal Taşlıçukur</b></p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <p>Not ortalaması:</p>
-                                <p class="text-md"><b>74.12</b></p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <p>Okul derecesi:</p>
-                                <p class="text-md"><b>512</b></p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <p>Sınıf derecesi:</p>
-                                <p class="text-md"><b>8</b></p>
+            <div class="text-end space-y-4">
+                <button class="btn btn-primary" type="button" id="print">Yazdır</button>
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-start">
+                    <div class="border rounded-lg p-4 overflow-x-auto">
+                        <div class="flex flex-wrap space-x-8 text-nowrap items-center">
+                            <img class="max-w-[150px] rounded-lg" src="/uploads/<%= student.photo %>" alt="">
+                            <div>
+                                <div class="flex space-x-2">
+                                    <p>İsim soyisim:</p>
+                                    <p class="text-md"><b>
+                                            <%= student.fullName %>
+                                        </b></p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Numara:</p>
+                                    <p class="text-md"><b>
+                                            <%= student.id %>
+                                        </b></p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Sınıf:</p>
+                                    <p class="text-md"><b>
+                                         <%= student.class.name %>
+                                        </b></p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Sınıf öğretmeni:</p>
+                                    <p class="text-md"><b>
+                                            <%= student.class.teacher.fullName %>
+                                        </b></p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Not ortalaması:</p>
+                                    <p class="text-md"><b>74.12</b></p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Okul derecesi:</p>
+                                    <p class="text-md"><b>512</b></p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Sınıf derecesi:</p>
+                                    <p class="text-md"><b>8</b></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="border rounded-lg p-4 overflow-x-auto">
-                    <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                        <table class="table-compact table max-w-8xl ">
-                            <thead>
-                                <tr>
-                                    <th>Ders</th>
-                                    <th>1. Sınav</th>
-                                    <th>2. Sınav</th>
-                                    <th>3. Sınav</th>
-                                    <th>Ortalama</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>Türkçe</th>
-                                    <td>75</td>
-                                    <td>90</td>
-                                    <td>90</td>
-                                    <td><b>85</b></td>
-                                </tr>
-                                <tr>
-                                    <th>Tarih</th>
-                                    <td>50</td>
-                                    <td>100</td>
-                                    <td>70</td>
-                                    <td><b>76.6</b></td>
-                                </tr>
-                                <tr>
-                                    <th>Matematik</th>
-                                    <td>100</td>
-                                    <td>100</td>
-                                    <td>100</td>
-                                    <td><b>100</b></td>
-                                </tr>
-                                <tr>
-                                    <th>İngilizce</th>
-                                    <td>20</td>
-                                    <td>50</td>
-                                    <td>60</td>
-                                    <td><b>43.3</b></td>
-                                </tr>
-                                <tr>
-                                    <th>Genel not ortalaması:</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><b>60.9</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="border rounded-lg p-4 overflow-x-auto">
+                        <div class="flex flex-wrap space-x-8 text-nowrap items-center">
+                            <table class="table-compact table max-w-8xl ">
+                                <thead>
+                                    <tr>
+                                        <th>Ders</th>
+                                        <th>1. Sınav</th>
+                                        <th>2. Sınav</th>
+                                        <th>3. Sınav</th>
+                                        <th>Ortalama</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Türkçe</th>
+                                        <td>75</td>
+                                        <td>90</td>
+                                        <td>90</td>
+                                        <td><b>85</b></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tarih</th>
+                                        <td>50</td>
+                                        <td>100</td>
+                                        <td>70</td>
+                                        <td><b>76.6</b></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Matematik</th>
+                                        <td>100</td>
+                                        <td>100</td>
+                                        <td>100</td>
+                                        <td><b>100</b></td>
+                                    </tr>
+                                    <tr>
+                                        <th>İngilizce</th>
+                                        <td>20</td>
+                                        <td>50</td>
+                                        <td>60</td>
+                                        <td><b>43.3</b></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Genel not ortalaması:</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><b>60.9</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
