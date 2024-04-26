@@ -29,8 +29,6 @@ app.use(routers);
 // Error Handler Middleware
 app.use(ErrorHandler);
 
-
-
 // Veritabanı bağlantısı
 (async () => {
     await connectDB();

@@ -4,6 +4,8 @@ const Class = require("../models/Class")
 const Teacher = require("../models/Teacher")
 const Grade = require("../models/Grade")
 const Lesson = require("../models/Lesson")
+const Group = require("../models/Group")
+const Parent = require("../models/Parent")
 
 module.exports.index = asyncHandler(async (req, res, next) => {
     const studentCount = await Student.count()
@@ -18,33 +20,35 @@ module.exports.index = asyncHandler(async (req, res, next) => {
 })
 
 module.exports.students = asyncHandler(async (req, res, next) => {
-    const students = await Student.findAll({},
-        {
-            include: [{
-                model: Class,
-                attributes: ["name"]
-            }], raw: true
-        })
+    const students = await Student.findAll({
+        include: [{
+            model: Group,
+            attributes: ["name"]
+        }]
+    });
     res.render("admin/students", {
         title: "Öğrenciler",
         students: students
     })
 })
+
 module.exports.student = asyncHandler(async (req, res, next) => {
     const id = req.params.id
     const student = await Student.findByPk(id, {
         include: [
             {
-                model: Class,
-                include: Teacher // Öğretmen verisini sınıf içinden al
+                model: Group,
+                include: Teacher
             },
             {
                 model: Grade,
-                include: Lesson
+                include: Lesson,
+                attributes:["grade"]
             },
             'parent'
         ]
     });
+    console.log(student)
     res.render("admin/student-profile", {
         title: `${student.fullName} - Öğrenci profili`,
         student: student

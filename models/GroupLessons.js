@@ -1,11 +1,12 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../data/databaseConnect");
 
-const Class = sequelize.define("class", {
-    name: {
+const GroupLessons = sequelize.define('groupLessons', {
+    teacherId: {
         type: DataTypes.INTEGER,
+        unique: true
     }
 });
 
 
-module.exports = Class;
+module.exports = GroupLessons;

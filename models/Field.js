@@ -1,11 +1,12 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../data/databaseConnect");
 
-const Class = sequelize.define("class", {
+const Field = sequelize.define('field', {
     name: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
+        unique: true
     }
 });
 
 
-module.exports = Class;
+module.exports = Field;

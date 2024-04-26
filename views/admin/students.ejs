@@ -4,7 +4,7 @@
         <%- include('../partials/_navbar') -%>
             <!-- Filter and Search -->
             <div class="w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
-                <input type="text" class="input input-lg max-w-full pl-10" placeholder="İsim giriniz" />
+                <input type="text" id="search" class="input input-lg max-w-full pl-10" placeholder="İsim giriniz" />
                 <select class="select">
                     <option>Seçiniz</option>
                     <option>A - Z</option>
@@ -23,6 +23,7 @@
                             <th>Fotoğraf</th>
                             <th>Numara</th>
                             <th>Ad soyad</th>
+                            <th>Grup</th>
                             <th>Ayarlar</th>
                         </tr>
                     </thead>
@@ -33,13 +34,18 @@
                                     <td>
                                         <%= ++count %>
                                     </td>
-                                    <td><img class="max-w-[110px] h-auto rounded-lg" src="/uploads/<%= student.photo %>" alt="<%= student.fullName %>">
+                                    <td>
+                                        <!-- <img class="max-w-[130px] h-auto rounded-lg" src="/uploads/<%= student.photo %>"
+                                            alt="<%= student.fullName %>"> -->
                                     </td>
                                     <td>
                                         <%= student.id %>
                                     </td>
-                                    <td>
+                                    <td class="name">
                                         <%= student.fullName %>
+                                    </td>
+                                    <td>
+                                        <%= student.group.name %>
                                     </td>
                                     <td>
                                         <div class="dropdown">
