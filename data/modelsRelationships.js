@@ -1,7 +1,7 @@
 const Lesson = require("../models/Lesson.js");
 const Student = require("../models/Student.js");
 const Teacher = require("../models/Teacher.js");
-const Grade = require("../models/Grade.js");
+const Grade = require("../models/PracticeExamTYT.js");
 const Class = require("../models/Class.js");
 const Parent = require("../models/Parent.js");
 const Level = require("../models/Level.js");
@@ -11,7 +11,7 @@ const Field = require("../models/Field.js");
 const GroupLessons = require("../models/GroupLessons.js");
 
 const relationships = async function () {
-    
+
     // Öğrenci ve Veli arasındaki ilişki
     Student.belongsTo(Parent, { foreignKey: 'parentId' });
     Parent.hasMany(Student, { foreignKey: 'parentId' }); // Birden fazla öğrencinin aynı veliye ait olmasını sağlar
@@ -21,8 +21,8 @@ const relationships = async function () {
     Lesson.belongsToMany(Group, { through: GroupLessons });
 
     // Ders ve Öğretmen arasındaki ilişki
-    Lesson.belongsToMany(Teacher, { through: 'LessonTeacher' });
-    Teacher.belongsToMany(Lesson, { through: 'LessonTeacher' });
+    Lesson.belongsToMany(Teacher, { through: 'Lesson_Teachers' });
+    Teacher.belongsToMany(Lesson, { through: 'Lesson_Teachers' });
 
     // Notlar ve Öğrenci arasındaki ilişki
     Grade.belongsTo(Student);

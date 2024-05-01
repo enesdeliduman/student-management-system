@@ -1,8 +1,18 @@
+<!-- views/site/404.ejs -->
 <%- include('../partials/_head') -%>
-
-    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
-        <p class="text-center">bir şeyler ters gitti :(</p>
+<body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+    <div class="text-start container mx-auto">
+        <h1 class="text-error text-3xl font-bold mb-4">Oops!</h1>
+        <p class="text-error text-lg mb-8">Bir şeyler ters gitti :(</p>
+        <div class="bg-error max-w-min text-nowrap p-2 rounded-lg">
+            <% err.stack.split('\n').forEach(function(line) { %>
+                <p><%= line %></p>
+            <% }); %>
+        </div>
+        <!-- Footer -->
         <%- include('../partials/_footer') -%>
-            <%- include('../partials/_scripts') -%>
-    </body>
-    </html>
+        <!-- Scripts -->
+        <%- include('../partials/_scripts') -%>
+    </div>
+</body>
+</html>

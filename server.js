@@ -32,8 +32,8 @@ app.use(ErrorHandler);
 // Veritabanı bağlantısı
 (async () => {
     await connectDB();
-    // await relationships();
-    // await createDummyData();
+    await relationships();
+    await createDummyData();
 })();
 
 const PORT = process.env.PORT || 5000

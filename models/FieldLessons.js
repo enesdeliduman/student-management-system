@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../data/databaseConnect");
 
-const FieldLessons = sequelize.define('fieldlessons', {
+const FieldLessons = sequelize.define('field_lessons', {
 
 });
 

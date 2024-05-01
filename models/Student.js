@@ -8,6 +8,10 @@ const Student = sequelize.define("student", {
     },
     photo: {
         type: DataTypes.STRING
+    },
+    dateOfBirth: {
+        type: DataTypes.DATEONLY,
+        defaultValue: new Date("2003-12-28")
     }
 });
 

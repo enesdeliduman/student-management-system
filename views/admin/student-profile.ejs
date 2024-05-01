@@ -4,7 +4,7 @@
         <%- include('../partials/_navbar') -%>
             <div class="text-end space-y-4">
                 <button class="btn btn-primary" type="button" id="print">Yazdır</button>
-                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-start">
+                <div class=" grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-center">
                     <div class="border rounded-lg p-4 overflow-x-auto">
                         <div class="flex flex-wrap space-x-8 text-nowrap items-center">
                             <img class="max-w-[150px] rounded-lg" src="/uploads/<%= student.photo %>" alt="">
@@ -22,9 +22,15 @@
                                         </b></p>
                                 </div>
                                 <div class="flex space-x-2">
+                                    <p>Doğum tarihi:</p>
+                                    <p class="text-md"><b>
+                                            <%= student.dateOfBirth %>
+                                        </b></p>
+                                </div>
+                                <div class="flex space-x-2">
                                     <p>Grup:</p>
                                     <p class="text-md"><b>
-                                         <%= student.group.name %>
+                                            <%= student.group.name %>
                                         </b></p>
                                 </div>
                                 <div class="flex space-x-2">
@@ -34,70 +40,37 @@
                                         </b></p>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <p>Not ortalaması:</p>
-                                    <p class="text-md"><b>74.12</b></p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Okul derecesi:</p>
-                                    <p class="text-md"><b>512</b></p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Sınıf derecesi:</p>
-                                    <p class="text-md"><b>8</b></p>
+                                    <p>Devamsızlık:</p>
+                                    <p class="text-md"><b>YOK</b></p>
                                 </div>
                             </div>
                         </div>
+                        <a class="link link-primary link-ghost-primary"
+                            href="/student/<%= student.id %>/practice-exams">Deneme sınavlarını görüntüle</a>
+                        <a class="link link-error link-ghost-error" href="/student/<%= student.id %>/settings">Ayarları
+                            görüntüle</a>
+
                     </div>
                     <div class="border rounded-lg p-4 overflow-x-auto">
                         <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                            <table class="table-compact table max-w-8xl ">
-                                <thead>
-                                    <tr>
-                                        <th>Ders</th>
-                                        <th>1. Sınav</th>
-                                        <th>2. Sınav</th>
-                                        <th>3. Sınav</th>
-                                        <th>Ortalama</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Türkçe</th>
-                                        <td>75</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td><b>85</b></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tarih</th>
-                                        <td>50</td>
-                                        <td>100</td>
-                                        <td>70</td>
-                                        <td><b>76.6</b></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Matematik</th>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td><b>100</b></td>
-                                    </tr>
-                                    <tr>
-                                        <th>İngilizce</th>
-                                        <td>20</td>
-                                        <td>50</td>
-                                        <td>60</td>
-                                        <td><b>43.3</b></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Genel not ortalaması:</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><b>60.9</b></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div>
+                                <div class="flex space-x-2">
+                                    <p>Veli Adı:</p>
+                                    <p class="text-md">
+                                        <b>
+                                            <%= student.parent.name %>
+                                        </b>
+                                    </p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <p>Veli telefon no:</p>
+                                    <p class="text-md">
+                                        <b>
+                                            <%= student.parent.telephoneNumber %>
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

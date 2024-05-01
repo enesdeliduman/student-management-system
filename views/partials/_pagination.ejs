@@ -1,0 +1,9 @@
+<% if (totalPages>2) { %>
+	<div class="pagination mt-8 flex justify-center">
+		<% for( let i=0; i < totalPages; i++ ) { %>
+			<a href="?page=<%= i %>" class="btn <%= (i==currentPage) ? " btn-active" : "" %>">
+				<%= i + 1%>
+			</a>
+			<% } %>
+	</div>
+	<% } %>

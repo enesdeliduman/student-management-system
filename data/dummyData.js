@@ -1,7 +1,8 @@
 const Lesson = require("../models/Lesson.js");
 const Student = require("../models/Student.js");
 const Teacher = require("../models/Teacher.js");
-const Grade = require("../models/Grade.js");
+const PracticeExamTYT = require("../models/PracticeExamTYT.js");
+const PracticeExamAYT = require("../models/PracticeExamAYT.js");
 const Parent = require("../models/Parent.js");
 const Class = require("../models/Class.js");
 const Level = require("../models/Level.js");
@@ -81,16 +82,16 @@ module.exports.createDummyData = async () => {
         ])
 
         const students = await Student.bulkCreate([
-            { fullName: "Student 1", photo: "student1.jpg" },
-            { fullName: "Student 2", photo: "photo1.jpg" },
-            { fullName: "Student 3", photo: "photo1.jpg" },
-            { fullName: "Student 4", photo: "photo1.jpg" },
-            { fullName: "Student 5", photo: "photo1.jpg" },
-            { fullName: "Student 6", photo: "photo1.jpg" },
-            { fullName: "Student 7", photo: "photo2.jpg" },
-            { fullName: "Student 8", photo: "photo2.jpg" },
-            { fullName: "Student 9", photo: "photo2.jpg" },
-            { fullName: "Student 10", photo: "photo2.jpg" }
+            { fullName: "Enes Deliduman", photo: "student1.jpg" },
+            { fullName: "Bedriye Şimşek", photo: "photo1.jpg" },
+            { fullName: "Yunuscan Acar", photo: "photo1.jpg" },
+            { fullName: "Sinem Baş", photo: "photo1.jpg" },
+            { fullName: "Sibel Akyıldız", photo: "photo1.jpg" },
+            { fullName: "Merve Kara", photo: "photo1.jpg" },
+            { fullName: "Emir Bıçakçı", photo: "photo2.jpg" },
+            { fullName: "Büşra Yavuz", photo: "photo2.jpg" },
+            { fullName: "Sevcan Kılıç", photo: "photo2.jpg" },
+            { fullName: "Bbatuhan Özkan", photo: "photo2.jpg" }
         ]);
 
 
@@ -107,32 +108,167 @@ module.exports.createDummyData = async () => {
             { name: "Lesson 10" },
         ]);
 
-        await Grade.bulkCreate([
-            { grade: 90, studentId: 1, lessonId: 1, },
-            { grade: 80, studentId: 1, lessonId: 1, },
-            { grade: 60, studentId: 1, lessonId: 1, },
-            { grade: 40, studentId: 2, lessonId: 2, },
-            { grade: 40, studentId: 2, lessonId: 2, },
-            { grade: 40, studentId: 2, lessonId: 2, },
-            { grade: 50, studentId: 3, lessonId: 3, },
-            { grade: 50, studentId: 3, lessonId: 3, },
-            { grade: 50, studentId: 3, lessonId: 3, },
-            { grade: 50, studentId: 4, lessonId: 4, },
-            { grade: 50, studentId: 4, lessonId: 4, },
-            { grade: 50, studentId: 4, lessonId: 4, },
-            { grade: 50, studentId: 5, lessonId: 5, },
-            { grade: 50, studentId: 5, lessonId: 5, },
-            { grade: 50, studentId: 5, lessonId: 5, },
-            { grade: 50, studentId: 6, lessonId: 6, },
-            { grade: 50, studentId: 6, lessonId: 6, },
-            { grade: 50, studentId: 6, lessonId: 6, },
-            { grade: 50, studentId: 7, lessonId: 7, },
-            { grade: 50, studentId: 7, lessonId: 7, },
-            { grade: 50, studentId: 7, lessonId: 7, },
-            { grade: 50, studentId: 8, lessonId: 8, },
-            { grade: 50, studentId: 8, lessonId: 8, },
-            { grade: 50, studentId: 8, lessonId: 8, },
-            { grade: 50, studentId: 9, lessonId: 9, },
+        await PracticeExamTYT.bulkCreate([
+            {
+                studentId: 1,
+                name: "Karekök 3",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 68,
+                turkish: {
+                    trueQ: 30,
+                    falseQ: 4,
+                    blankQ: 6,
+                    net: 26
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                social: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    history: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    religiousCulture: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    geography: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    philosophy: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                },
+                science: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    biology: {
+                        trueQ: 6,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    chemistry: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 2,
+                        net: 5
+                    },
+                    physics: {
+                        trueQ: 5,
+                        falseQ: 2,
+                        blankQ: 0,
+                        net: 4.5
+                    }
+                },
+                practiceDate: '2023-12-28'
+            }
+        ]);
+        await PracticeExamAYT.bulkCreate([
+            {
+                studentId: 1,
+                name: "Karekök 3",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 68,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                practiceDate: '2023-10-28'
+            },
         ]);
 
         // Veli ve öğrenci
