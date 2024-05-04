@@ -7,7 +7,12 @@ const Student = sequelize.define("student", {
         allowNull: false
     },
     photo: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull:false
+    },
+    telephoneNumber: {
+        type: DataTypes.STRING,
+        allowNull:true
     },
     dateOfBirth: {
         type: DataTypes.DATEONLY,

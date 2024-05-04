@@ -2,78 +2,93 @@
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
-            <div class="text-end space-y-4">
-                <button class="btn btn-primary" type="button" id="print">Yazdır</button>
-                <div class=" grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-center">
-                    <div class="border rounded-lg p-4 overflow-x-auto">
-                        <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                            <img class="max-w-[150px] rounded-lg" src="/uploads/<%= student.photo %>" alt="">
-                            <div>
-                                <div class="flex space-x-2">
-                                    <p>İsim soyisim:</p>
-                                    <p class="text-md"><b>
-                                            <%= student.fullName %>
-                                        </b></p>
+        <div class="text-end space-y-4">
+            <button class="btn btn-primary" type="button" id="print">Yazdır</button>
+            <% if (typeof alert != "undefined" ) { %>
+                <%- include('../partials/_alert',alert) -%>
+                    <% } %>
+                        <div class=" grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-center">
+                            <div class="border rounded-lg p-4 overflow-x-auto">
+                                <div class="flex flex-wrap space-x-8 text-nowrap items-center">
+                                    <img class="max-w-[150px] rounded-lg" src="/uploads/<%= student.photo %>" alt="">
+                                    <div>
+                                        <div class="flex space-x-2">
+                                            <p>İsim soyisim:</p>
+                                            <p class="text-md"><b>
+                                                    <%= student.fullName %>
+                                                </b></p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Telefon no:</p>
+                                            <p class="text-md"><b>
+                                                    <%= student.telephoneNumber %>
+                                                </b></p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Numara:</p>
+                                            <p class="text-md"><b>
+                                                    <%= student.id %>
+                                                </b></p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Doğum tarihi:</p>
+                                            <p class="text-md"><b>
+                                                    <%= student.dateOfBirth %>
+                                                </b></p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Grup:</p>
+                                            <p class="text-md"><b>
+                                                    <%= student.group.name %>
+                                                </b></p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Sınıf öğretmeni:</p>
+                                            <p class="text-md"><b>
+                                                    <%= student.group.teacher.fullName %>
+                                                </b></p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Devamsızlık:</p>
+                                            <p class="text-md"><b>YOK</b></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex space-x-2">
-                                    <p>Numara:</p>
-                                    <p class="text-md"><b>
-                                            <%= student.id %>
-                                        </b></p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Doğum tarihi:</p>
-                                    <p class="text-md"><b>
-                                            <%= student.dateOfBirth %>
-                                        </b></p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Grup:</p>
-                                    <p class="text-md"><b>
-                                            <%= student.group.name %>
-                                        </b></p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Sınıf öğretmeni:</p>
-                                    <p class="text-md"><b>
-                                            <%= student.group.teacher.fullName %>
-                                        </b></p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Devamsızlık:</p>
-                                    <p class="text-md"><b>YOK</b></p>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="link link-primary link-ghost-primary"
-                            href="/student/<%= student.id %>/practice-exams">Deneme sınavlarını görüntüle</a>
-                        <a class="link link-error link-ghost-error" href="/student/<%= student.id %>/settings">Ayarları
-                            görüntüle</a>
+                                <a class="link link-primary link-ghost-primary"
+                                    href="/student/<%= student.id %>/practice-exams">Deneme sınavlarını görüntüle</a>
+                                <a class="link link-error link-ghost-error"
+                                    href="/student/<%= student.id %>/settings">Ayarları
+                                    görüntüle</a>
 
-                    </div>
-                    <div class="border rounded-lg p-4 overflow-x-auto">
-                        <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                            <div>
-                                <div class="flex space-x-2">
-                                    <p>Veli Adı:</p>
-                                    <p class="text-md">
-                                        <b>
-                                            <%= student.parent.name %>
-                                        </b>
-                                    </p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <p>Veli telefon no:</p>
-                                    <p class="text-md">
-                                        <b>
-                                            <%= student.parent.telephoneNumber %>
-                                        </b>
-                                    </p>
+                            </div>
+                            <div class="border rounded-lg p-4 overflow-x-auto">
+                                <div class="flex flex-wrap space-x-8 text-nowrap items-center">
+                                    <div>
+                                        <div class="flex space-x-2">
+                                            <p>Veli Adı:</p>
+                                            <p class="text-md">
+                                                <b>
+                                                    <%= student.parent.fullName %>
+                                                </b>
+                                            </p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <p>Veli telefon no:</p>
+                                            <p class="text-md">
+                                                <b>
+                                                    <%= student.parent.telephoneNumber %>
+                                                </b>
+                                            </p>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <a class="link link-warning link-ghost-warning"
+                                                href="/parent-settings/<%= student.parent.id %>">Veli bilgilerini
+                                                düzenle</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
             <%- include('../partials/_footer') -%>
                 <%- include('../partials/_scripts') -%>

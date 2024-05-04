@@ -5,14 +5,15 @@
             <!-- Filter and Search -->
             <div class="w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
                 <input type="text" id="search" class="input input-lg max-w-full pl-10" placeholder="İsim giriniz" />
-                <select class="select">
-                    <option>Seçiniz</option>
-                    <option>A - Z</option>
-                    <option>Başarı ortalaması (önce büyük)</option>
-                    <option>Başarı ortalaması (önce küçük)</option>
-                    <option>Doğum tarihi (önce büyük)</option>
-                    <option>Doğum tarihi (önce küçük)</option>
-                </select>
+                <form action="get">
+                    <select class="select" id="selected">
+                        <option value="default" <%=(filter==="default" )? "selected" :"" %>>Tümü</option>
+                        <option value="tytHigh" <%=(filter==="tytHigh" )? "selected" :"" %>>TYT - (En yüksek net)
+                        </option>
+                        <option value="aytHigh" <%=(filter==="aytHigh" )? "selected" :"" %>>AYT - (En yüksek net)
+                        </option>
+                    </select>
+                </form>
             </div>
             <!-- Datas -->
             <% if (practices.length==0) { %>
@@ -409,8 +410,11 @@
                                 <% }) %>
                         </div>
                         <% } %>
-                            <%- include('../partials/_footer') -%>
-                                <%- include('../partials/_scripts') -%>
+                            <%- include('../partials/_pagination') -%>
+
+                                <%- include('../partials/_footer') -%>
+                                    <%- include('../partials/_scripts') -%>
+
     </body>
 
     </html>

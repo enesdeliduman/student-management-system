@@ -17,17 +17,17 @@ module.exports.createDummyData = async () => {
 
         // Veri ekleme işlemi
         const parents = await Parent.bulkCreate([
-            { name: 'Parent 1', telephoneNumber: '1169999250' },
-            { name: 'Parent 2', telephoneNumber: '5105994374' },
-            { name: 'Parent 3', telephoneNumber: '1795209956' },
-            { name: 'Parent 4', telephoneNumber: '3850834346' },
-            { name: "Parent 4", telephoneNumber: "3850834346" },
-            { name: 'Parent 5', telephoneNumber: '7481006621' },
-            { name: 'Parent 6', telephoneNumber: '3175817427' },
-            { name: 'Parent 7', telephoneNumber: '4135221094' },
-            { name: 'Parent 8', telephoneNumber: '1413853514' },
-            { name: 'Parent 9', telephoneNumber: '8164242074' },
-            { name: 'Parent 10', telephoneNumber: '4240593014' },
+            { fullName: 'Parent 1', telephoneNumber: '1169999250' },
+            { fullName: 'Parent 2', telephoneNumber: '5105994374' },
+            { fullName: 'Parent 3', telephoneNumber: '1795209956' },
+            { fullName: 'Parent 4', telephoneNumber: '3850834346' },
+            { fullName: "Parent 4", telephoneNumber: "3850834346" },
+            { fullName: 'Parent 5', telephoneNumber: '7481006621' },
+            { fullName: 'Parent 6', telephoneNumber: '3175817427' },
+            { fullName: 'Parent 7', telephoneNumber: '4135221094' },
+            { fullName: 'Parent 8', telephoneNumber: '1413853514' },
+            { fullName: 'Parent 9', telephoneNumber: '8164242074' },
+            { fullName: 'Parent 10', telephoneNumber: '4240593014' },
         ]);
 
         const teachers = await Teacher.bulkCreate([
@@ -182,8 +182,233 @@ module.exports.createDummyData = async () => {
                         net: 4.5
                     }
                 },
-                practiceDate: '2023-12-28'
-            }
+                practiceDate: '2023-01-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 4",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 69,
+                turkish: {
+                    trueQ: 30,
+                    falseQ: 4,
+                    blankQ: 6,
+                    net: 26
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                social: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    history: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    religiousCulture: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    geography: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    philosophy: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                },
+                science: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    biology: {
+                        trueQ: 6,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    chemistry: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 2,
+                        net: 5
+                    },
+                    physics: {
+                        trueQ: 5,
+                        falseQ: 2,
+                        blankQ: 0,
+                        net: 4.5
+                    }
+                },
+                practiceDate: '2023-02-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 5",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 70,
+                turkish: {
+                    trueQ: 30,
+                    falseQ: 4,
+                    blankQ: 6,
+                    net: 26
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                social: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    history: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    religiousCulture: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    geography: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    philosophy: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                },
+                science: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    biology: {
+                        trueQ: 6,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    chemistry: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 2,
+                        net: 5
+                    },
+                    physics: {
+                        trueQ: 5,
+                        falseQ: 2,
+                        blankQ: 0,
+                        net: 4.5
+                    }
+                },
+                practiceDate: '2023-03-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 6",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 71,
+                turkish: {
+                    trueQ: 30,
+                    falseQ: 4,
+                    blankQ: 6,
+                    net: 26
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                social: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    history: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    religiousCulture: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    geography: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    philosophy: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                },
+                science: {
+                    totalTrue: 20,
+                    totalFalse: 0,
+                    totalBlank: 0,
+                    totalNet: 20,
+                    biology: {
+                        trueQ: 6,
+                        falseQ: 0,
+                        blankQ: 0,
+                        net: 5
+                    },
+                    chemistry: {
+                        trueQ: 5,
+                        falseQ: 0,
+                        blankQ: 2,
+                        net: 5
+                    },
+                    physics: {
+                        trueQ: 5,
+                        falseQ: 2,
+                        blankQ: 0,
+                        net: 4.5
+                    }
+                },
+                practiceDate: '2023-04-28'
+            },
         ]);
         await PracticeExamAYT.bulkCreate([
             {
@@ -267,7 +492,505 @@ module.exports.createDummyData = async () => {
                         net: 26
                     },
                 },
+                practiceDate: '2023-05-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 4",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 69,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                practiceDate: '2023-06-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 5",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 70,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                practiceDate: '2023-07-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 6",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 71,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                practiceDate: '2023-08-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 7",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 72,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
                 practiceDate: '2023-10-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 8",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 73,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                practiceDate: '2023-10-28'
+            },
+            {
+                studentId: 1,
+                name: "Karekök 9",
+                totalTrue: 76,
+                totalFalse: 18,
+                totalBlank: 23,
+                totalNet: 74,
+                TurkishLanguageAndLiteratureSocialSciences1: {
+                    TurkishLanguageAndLiterature: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    socialScience1: {
+                        history1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        },
+                        geography1: {
+                            trueQ: 30,
+                            falseQ: 4,
+                            blankQ: 6,
+                            net: 26
+                        }
+                    }
+                },
+                mathematics: {
+                    trueQ: 10,
+                    falseQ: 12,
+                    blankQ: 18,
+                    net: 7
+                },
+                socialScience2: {
+                    history2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    geography2: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    philosophy: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    religiousCulture: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                science: {
+                    physics: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    chemistry: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                    biology: {
+                        trueQ: 30,
+                        falseQ: 4,
+                        blankQ: 6,
+                        net: 26
+                    },
+                },
+                practiceDate: '2023-09-28'
             },
         ]);
 

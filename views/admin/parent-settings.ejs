@@ -1,0 +1,36 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <div class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center">
+                <section class="rounded-xl">
+                    <form
+                        class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20" method="post">
+                        <div class="form-group">
+                            <div class="form-field">
+                                <label class="form-label">İsim</label>
+                                <input placeholder="Type here" type="text" name="fullName" value="<%= parent.fullName %>"
+                                    class="input max-w-full" />
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">
+                                    <span>Şifre</span>
+                                </label>
+                                <div class="form-control">
+                                    <input placeholder="Type here" type="text" name="telephoneNumber"
+                                        value="<%= parent.telephoneNumber %>" class="input max-w-full" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="send" class="rounded-lg btn btn-primary btn-block">Güncelle</button>
+                        </div>
+                    </form>
+                </section>
+
+            </div>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>

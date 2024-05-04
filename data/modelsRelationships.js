@@ -28,10 +28,6 @@ const relationships = async function () {
     Grade.belongsTo(Student);
     Student.hasMany(Grade, { foreignKey: 'studentId' });
 
-    // Notlar ve Ders arasındaki ilişki
-    Grade.belongsTo(Lesson);
-    Lesson.hasMany(Grade, { foreignKey: 'lessonId' });
-
     // Grup ve öğrenci
     Group.hasMany(Student);
     Student.belongsTo(Group);

@@ -7,6 +7,13 @@ router.get("/", adminController.index)
 router.get("/students", adminController.students)
 router.get("/student/:id", adminController.student)
 router.get("/student/:id/practice-exams", adminController.studentPractices)
-router.get("/student/:id/settings", adminController.studentSettings)
+
+router.route("/student/:id/settings")
+    .get(adminController.studentSettingsGet)
+    .post(adminController.studentSettingsPost);
+
+router.route("/parent-settings/:id")
+    .get(adminController.parentSettingsGet)
+    .post(adminController.parentSettingsPost);
 
 module.exports = router

@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../data/databaseConnect");
 
 const Parent = sequelize.define("parent", {
-    name: {
+    fullName: {
         type: DataTypes.STRING,
         allowNull: false
     },
