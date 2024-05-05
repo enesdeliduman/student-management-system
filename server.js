@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const ejs = require('ejs');
 const dotenv = require("dotenv")
+const csurf = require("csurf");
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -12,6 +13,7 @@ dotenv.config({
 const routers = require("./routers/index");
 const { connectDB, sequelize } = require('./data/databaseConnect.js');
 const { ErrorHandler } = require("./middlewares/ErrorHandler.js")
+const locals= require("./middlewares/locals.js")
 const relationships = require("./data/modelsRelationships.js");
 const createTables = require("./data/dummyData.js").createTables;
 const createDummyData = require("./data/dummyData.js").createDummyData;
@@ -30,6 +32,8 @@ app.use(session({
         db: sequelize
     })
 }));
+app.use(locals)
+app.use(csurf())
 
 // EJS
 app.set('view engine', 'ejs');
@@ -46,8 +50,8 @@ app.use(ErrorHandler);
 // Veritabanı bağlantısı
 (async () => {
     await connectDB();
-    await relationships();
-    await createDummyData();
+    // await relationships();
+    // await createDummyData();
 })();
 
 const PORT = process.env.PORT || 5000

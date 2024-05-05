@@ -2,26 +2,32 @@
 
     <body class="bg-backgroundSecondary py-32 px-6 ">
         <div class="bg-backgroundPrimary p-12 rounded-3xl mx-auto flex w-full max-w-sm flex-col gap-6">
-            <div class="form-group">
-                <div class="form-field">
-                    <label for="username" class="form-label">Kullanıcı adı</label>
-                    <div class="form-control">
-                        <input id="username" placeholder="Type here" type="text" class="input max-w-full" />
-                    </div>
-                </div>
-                <div class="form-field">
-                    <label for="password" class="form-label">Şifre</label>
-                    <div class="form-control">
-                        <input id="password" placeholder="Type here" name="password" type="password"
-                            class="input max-w-full" />
-                    </div>
-                </div>
-                <div class="form-field pt-5">
-                    <div class="form-control justify-between">
-                        <button type="button" class="btn btn-primary w-full">Giriş yap</button>
-                    </div>
-                </div>
+<form method="post">
+    <div class="form-group">
+        <% if (typeof alert != "undefined" ) { %>
+            <%- include('../partials/_alert',alert) -%>
+                <% } %> 
+        <div class="form-field">
+            <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+            <label for="username" class="form-label">Kullanıcı adı</label>
+            <div class="form-control">
+                <input id="username" placeholder="Type here" type="text" name="username" class="input max-w-full" />
             </div>
+        </div>
+        <div class="form-field">
+            <label for="password" class="form-label">Şifre</label>
+            <div class="form-control">
+                <input id="password" placeholder="Type here" name="password" type="password"
+                    class="input max-w-full" />
+            </div>
+        </div>
+        <div class="form-field pt-5">
+            <div class="form-control justify-between">
+                <button type="send" class="btn btn-primary w-full">Giriş yap</button>
+            </div>
+        </div>
+    </div>
+</form>
         </div>
         <%- include('../partials/_footer') -%>
         <%- include('../partials/_scripts') -%>

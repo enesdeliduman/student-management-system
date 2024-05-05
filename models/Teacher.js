@@ -5,6 +5,10 @@ const Teacher = sequelize.define("teacher", {
     fullName: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    photo: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 });
 

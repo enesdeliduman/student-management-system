@@ -1,19 +1,22 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const adminController = require("../controllers/adminController")
+const adminController = require("../controllers/adminController");
+const isAuth = require("../middlewares/isAuth");
+const isAdmin = require("../middlewares/isAdmin");
 
-router.get("/", adminController.index)
-router.get("/students", adminController.students)
-router.get("/student/:id", adminController.student)
-router.get("/student/:id/practice-exams", adminController.studentPractices)
+router.get("/", isAuth, adminController.index);
+router.get("/students", isAdmin, adminController.students);
+router.get("/student/:id", isAdmin, adminController.student);
+router.get("/student/:id/practice-exams", isAdmin, adminController.studentPractices);
 
-router.route("/student/:id/settings")
-    .get(adminController.studentSettingsGet)
-    .post(adminController.studentSettingsPost);
+router.get("/teachers", isAdmin, adminController.teachers);
+router.get("/teacher/:id", isAdmin, adminController.teacher);
 
-router.route("/parent-settings/:id")
-    .get(adminController.parentSettingsGet)
-    .post(adminController.parentSettingsPost);
+router.get("/student/:id/settings", isAdmin, adminController.studentSettingsGet);
+router.post("/student/:id/settings", adminController.studentSettingsPost);
 
-module.exports = router
+router.get("/parent-settings/:id", isAdmin, adminController.parentSettingsGet)
+router.post("/parent-settings/:id", adminController.parentSettingsPost);
+
+module.exports = router;

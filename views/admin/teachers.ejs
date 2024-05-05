@@ -1,0 +1,59 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <!-- Filter and Search -->
+            <div class="w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
+                <input type="text" id="search" class="input input-lg max-w-full pl-10" placeholder="İsim giriniz" />
+                <select class="select">
+                    <option>Seçiniz</option>
+                    <option>A - Z</option>
+                    <option>Başarı ortalaması (önce büyük)</option>
+                    <option>Başarı ortalaması (önce küçük)</option>
+                    <option>Doğum tarihi (önce büyük)</option>
+                    <option>Doğum tarihi (önce küçük)</option>
+                </select>
+            </div>
+            <!-- Table -->
+            <% if (teachers.length==0) { %>
+                <%- include('../partials/_noData') -%>
+                    <% } else { %>
+                        <div class="flex min-w-full overflow-x-auto justify-center">
+                            <table class="table-compact table max-w-8xl ">
+                                <thead>
+                                    <tr>
+                                        <th>Numara</th>
+                                        <th>Numara</th>
+                                        <th>Ad soyad</th>
+                                        <th>Seçenekler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% let count=0 %>
+                                        <% teachers.forEach(teacher=> { %>
+                                                <td>
+                                                    <%= teacher.id %>
+                                                </td>
+                                                <td>
+                                                    <%= teacher.id %>
+                                                </td>
+                                                <td class="name">
+                                                    <%= teacher.fullName %>
+                                                </td>
+                                                <td class="max-w-min">
+                                                    <a class="link link-primary link-ghost-primary"
+                                                        href="teacher/<%= teacher.id %>">Profili görüntüle</a>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% } %>
+
+                            <%- include('../partials/_pagination') -%>
+                                <%- include('../partials/_footer') -%>
+                                    <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>
