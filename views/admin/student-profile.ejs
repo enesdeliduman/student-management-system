@@ -4,6 +4,14 @@
         <%- include('../partials/_navbar') -%>
         <div class="text-end space-y-4">
             <button class="btn btn-primary" type="button" id="print">Yazdır</button>
+            <div class="dropdown">
+                <label class="btn btn-solid-primary my-2" tabindex="0">Seçenekler</label>
+                <div class="dropdown-menu">
+                    <a tabindex="-1" href="/student/<%= student.id %>/practice-exams" class="dropdown-item text-start text-sm link link-primary link-ghost-primary">Deneme sınavlarını görüntüle</a>
+                    <a tabindex="-1" href="/student/<%= student.id %>/settings" class="dropdown-item text-start text-sm link link-error link-ghost-error">Ayarları görüntüle</a>
+                    <a tabindex="-1" href="/student/<%= student.id %>/truancies" class="dropdown-item text-start text-sm link link-success link-ghost-success">Devamsızlıkları görüntüle</a>
+                </div>
+            </div>
             <% if (typeof alert != "undefined" ) { %>
                 <%- include('../partials/_alert',alert) -%>
                     <% } %>
@@ -50,16 +58,10 @@
                                         </div>
                                         <div class="flex space-x-2">
                                             <p>Devamsızlık:</p>
-                                            <p class="text-md"><b>YOK</b></p>
+                                            <p class="text-md"><b><%= student.truancies.length %></b></p>
                                         </div>
                                     </div>
-                                </div>
-                                <a class="link link-primary link-ghost-primary"
-                                    href="/student/<%= student.id %>/practice-exams">Deneme sınavlarını görüntüle</a>
-                                <a class="link link-error link-ghost-error"
-                                    href="/student/<%= student.id %>/settings">Ayarları
-                                    görüntüle</a>
-
+                                </div>  
                             </div>
                             <div class="border rounded-lg p-4 overflow-x-auto">
                                 <div class="flex flex-wrap space-x-8 text-nowrap items-center">
@@ -79,11 +81,6 @@
                                                     <%= student.parent.telephoneNumber %>
                                                 </b>
                                             </p>
-                                        </div>
-                                        <div class="flex space-x-2">
-                                            <a class="link link-warning link-ghost-warning"
-                                                href="/parent-settings/<%= student.parent.id %>">Veli bilgilerini
-                                                düzenle</a>
                                         </div>
                                     </div>
                                 </div>

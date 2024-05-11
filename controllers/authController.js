@@ -62,6 +62,13 @@ module.exports.signInPost = asyncHandler(async (req, res, next) => {
   res.render("auth/sign-in", {
     title: "Giriş Yap",
     csrfToken: req.csrfToken(),
-    alert: req.session.alert, // alert eklemeyi unutmayın
+    alert: req.session.alert
   });
+});
+module.exports.logOut = asyncHandler(async (req, res, next) => {
+  req.session.isAuth = false
+  req.session.role = null
+  req.session.fullName = null
+
+  res.redirect("/")
 });

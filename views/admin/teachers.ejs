@@ -23,8 +23,8 @@
                                 <thead>
                                     <tr>
                                         <th>Numara</th>
-                                        <th>Numara</th>
                                         <th>Ad soyad</th>
+                                        <th>Branş</th>
                                         <th>Seçenekler</th>
                                     </tr>
                                 </thead>
@@ -34,11 +34,11 @@
                                                 <td>
                                                     <%= teacher.id %>
                                                 </td>
-                                                <td>
-                                                    <%= teacher.id %>
+                                                <td cQAlass="name">
+                                                    <%= teacher.fullName %>
                                                 </td>
                                                 <td class="name">
-                                                    <%= teacher.fullName %>
+                                                    <%= teacher.branch.name %>
                                                 </td>
                                                 <td class="max-w-min">
                                                     <a class="link link-primary link-ghost-primary"

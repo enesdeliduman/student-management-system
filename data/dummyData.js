@@ -1,10 +1,12 @@
 const Lesson = require('../models/Lesson.js')
 const Student = require('../models/Student.js')
 const Teacher = require('../models/Teacher.js')
+const Leave = require('../models/Leave.js')
 const User = require('../models/User.js')
 const PracticeExamTYT = require('../models/PracticeExamTYT.js')
 const PracticeExamAYT = require('../models/PracticeExamAYT.js')
 const Parent = require('../models/Parent.js')
+const Branch = require('../models/Branch.js')
 const Class = require('../models/Class.js')
 const Level = require('../models/Level.js')
 const Group = require('../models/Group.js')
@@ -12,13 +14,12 @@ const Field = require('../models/Field.js')
 const Role = require('../models/Role.js')
 const bcrypt = require('bcrypt')
 const { sequelize } = require('./databaseConnect.js')
+const Truancy = require('../models/Truancy.js')
 
 module.exports.createDummyData = async () => {
   try {
-    // Tabloları oluştur
     await sequelize.sync({ force: true })
 
-    // Veri ekleme işlemi
     const parents = await Parent.bulkCreate([
       { fullName: 'Parent 1', telephoneNumber: '1169999250' },
       { fullName: 'Parent 2', telephoneNumber: '5105994374' },
@@ -30,7 +31,18 @@ module.exports.createDummyData = async () => {
       { fullName: 'Parent 7', telephoneNumber: '4135221094' },
       { fullName: 'Parent 8', telephoneNumber: '1413853514' },
       { fullName: 'Parent 9', telephoneNumber: '8164242074' },
-      { fullName: 'Parent 10', telephoneNumber: '4240593014' }
+      { fullName: 'Parent 10', telephoneNumber: '4240593014' },
+      { fullName: 'Parent 11', telephoneNumber: '1169999250' },
+      { fullName: 'Parent 12', telephoneNumber: '5105994374' },
+      { fullName: 'Parent 13', telephoneNumber: '1795209956' },
+      { fullName: 'Parent 14', telephoneNumber: '3850834346' },
+      { fullName: 'Parent 14', telephoneNumber: '3850834346' },
+      { fullName: 'Parent 15', telephoneNumber: '7481006621' },
+      { fullName: 'Parent 16', telephoneNumber: '3175817427' },
+      { fullName: 'Parent 17', telephoneNumber: '4135221094' },
+      { fullName: 'Parent 18', telephoneNumber: '1413853514' },
+      { fullName: 'Parent 19', telephoneNumber: '8164242074' },
+      { fullName: 'Parent 20', telephoneNumber: '4240593014' }
     ])
 
     const roles = await Role.bulkCreate([
@@ -38,6 +50,18 @@ module.exports.createDummyData = async () => {
       { name: 'Teacher' },
       { name: 'Student' }
     ])
+
+    const branches = await Branch.bulkCreate([
+      { name: "Türkçe" },
+      { name: "Matematik" },
+      { name: "İngilizce" },
+      { name: "Biyoloji" },
+      { name: "Kimya" },
+      { name: "Fizik" },
+      { name: "Tarih" },
+      { name: "Coğrafya" },
+    ])
+
     const users = await User.bulkCreate([
       {
         username: 'admin',
@@ -55,6 +79,7 @@ module.exports.createDummyData = async () => {
         roleId: roles[2].id
       }
     ])
+
     const teachers = await Teacher.bulkCreate([
       { fullName: 'Teacher 1', userId: users[0].id },
       { fullName: 'Teacher 2', userId: users[1].id },
@@ -80,6 +105,7 @@ module.exports.createDummyData = async () => {
       { name: '345' },
       { name: '345' }
     ])
+
     const levels = await Level.bulkCreate([
       { name: '9. Sınıflar' },
       { name: '10. Sınıflar' },
@@ -87,6 +113,7 @@ module.exports.createDummyData = async () => {
       { name: '12. Sınıflar' },
       { name: 'Mezun' }
     ])
+
     const groups = await Group.bulkCreate([
       { name: '123' },
       { name: '234' },
@@ -120,7 +147,16 @@ module.exports.createDummyData = async () => {
       { fullName: 'Emir Bıçakçı', photo: 'photo2.jpg' },
       { fullName: 'Büşra Yavuz', photo: 'photo2.jpg' },
       { fullName: 'Sevcan Kılıç', photo: 'photo2.jpg' },
-      { fullName: 'Bbatuhan Özkan', photo: 'photo2.jpg' }
+      { fullName: 'Batuhan Özkan', photo: 'photo2.jpg' },
+      { fullName: 'Melek Sıla Ekiz', photo: 'photo1.jpg' },
+      { fullName: 'Merve Acar', photo: 'photo1.jpg' },
+      { fullName: 'Samet Karayüz', photo: 'photo1.jpg' },
+      { fullName: 'Agop Malermeni', photo: 'photo1.jpg' },
+      { fullName: 'Hasan Kaya', photo: 'photo1.jpg' },
+      { fullName: 'Mustafa Kemal Güzelad', photo: 'photo2.jpg' },
+      { fullName: 'Zerrin Paşazade', photo: 'photo2.jpg' },
+      { fullName: 'Kerim Arabacı', photo: 'photo2.jpg' },
+      { fullName: 'Mert Ulak', photo: 'photo2.jpg' }
     ])
 
     const lessons = await Lesson.bulkCreate([
@@ -438,6 +474,7 @@ module.exports.createDummyData = async () => {
         practiceDate: '2023-04-28'
       }
     ])
+
     await PracticeExamAYT.bulkCreate([
       {
         studentId: 1,
@@ -1022,22 +1059,96 @@ module.exports.createDummyData = async () => {
       }
     ])
 
+    await Truancy.bulkCreate([
+      { studentId: 1 },
+      { studentId: 1 },
+      { studentId: 1 },
+      { studentId: 1 },
+      { studentId: 2 },
+      { studentId: 2 },
+      { studentId: 3 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 4 },
+      { studentId: 5 },
+      { studentId: 6 },
+      { studentId: 7 },
+      { studentId: 8 },
+      { studentId: 9 },
+      { studentId: 10 },
+    ])
+
+    await Leave.bulkCreate([
+      { teacherId: 1, type: "Ücretli" },
+      { teacherId: 1, type: "Ücretli" },
+      { teacherId: 1, type: "Ücretli" },
+      { teacherId: 1, type: "Ücretli" },
+      { teacherId: 2, type: "Ücretli" },
+      { teacherId: 2, type: "Ücretli" },
+      { teacherId: 3, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 4, type: "Ücretli" },
+      { teacherId: 5, type: "Ücretli" },
+      { teacherId: 6, type: "Ücretli" },
+      { teacherId: 7, type: "Ücretli" },
+      { teacherId: 8, type: "Ücretli" },
+      { teacherId: 9, type: "Ücretli" },
+      { teacherId: 10, type: "Ücretli" },
+    ])
+
     // Veli ve öğrenci
     await parents[0].addStudent(students[0])
-    await parents[0].addStudent(students[1])
-    await parents[0].addStudent(students[2])
-    await parents[0].addStudent(students[3])
-    await parents[0].addStudent(students[4])
-    await parents[0].addStudent(students[5])
-    await parents[0].addStudent(students[6])
-    await parents[0].addStudent(students[7])
-    await parents[0].addStudent(students[8])
-    await parents[0].addStudent(students[9])
+    await parents[1].addStudent(students[1])
+    await parents[2].addStudent(students[2])
+    await parents[3].addStudent(students[3])
+    await parents[4].addStudent(students[4])
+    await parents[5].addStudent(students[5])
+    await parents[6].addStudent(students[6])
+    await parents[7].addStudent(students[7])
+    await parents[8].addStudent(students[8])
+    await parents[9].addStudent(students[9])
+    await parents[10].addStudent(students[10])
+    await parents[11].addStudent(students[11])
+    await parents[12].addStudent(students[12])
+    await parents[13].addStudent(students[13])
+    await parents[14].addStudent(students[14])
+    await parents[15].addStudent(students[15])
+    await parents[16].addStudent(students[16])
+    await parents[17].addStudent(students[17])
+    await parents[18].addStudent(students[18])
+    await parents[19].addStudent(students[19])
 
     // Ders ve öğretmen
     await lessons[0].addTeacher(teachers[0])
     await lessons[1].addTeacher(teachers[1])
     await lessons[0].addTeacher(teachers[1])
+
+
+    // Branş ve öğretmen
+    await branches[0].addTeacher(teachers[0])
+    await branches[0].addTeacher(teachers[1])
+    await branches[1].addTeacher(teachers[2])
+    await branches[2].addTeacher(teachers[3])
+    await branches[3].addTeacher(teachers[4])
+    await branches[4].addTeacher(teachers[4])
+    await branches[5].addTeacher(teachers[5])
+    await branches[6].addTeacher(teachers[6])
+    await branches[7].addTeacher(teachers[7])
+    await branches[7].addTeacher(teachers[8])
+    await branches[7].addTeacher(teachers[9])
 
     // Grup ve öğrenci
     await groups[0].addStudent(students[0])
@@ -1050,6 +1161,16 @@ module.exports.createDummyData = async () => {
     await groups[1].addStudent(students[7])
     await groups[1].addStudent(students[8])
     await groups[2].addStudent(students[9])
+    await groups[3].addStudent(students[10])
+    await groups[3].addStudent(students[11])
+    await groups[3].addStudent(students[12])
+    await groups[3].addStudent(students[13])
+    await groups[4].addStudent(students[14])
+    await groups[5].addStudent(students[15])
+    await groups[5].addStudent(students[16])
+    await groups[5].addStudent(students[17])
+    await groups[6].addStudent(students[18])
+    await groups[6].addStudent(students[19])
 
     // Class ve grup
     await classes[0].addGroup(groups[0])

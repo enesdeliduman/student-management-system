@@ -1,22 +1,31 @@
 const asyncHandler = require("express-async-handler");
 const Student = require("../models/Student");
 const Class = require("../models/Class");
+const Leave = require("../models/Leave");
 const Teacher = require("../models/Teacher");
 const Lesson = require("../models/Lesson");
 const Group = require("../models/Group");
+const Truancy = require("../models/Truancy");
 const Parent = require("../models/Parent");
 const PracticeExamTYT = require("../models/PracticeExamTYT");
 const PracticeExamAYT = require("../models/PracticeExamAYT");
+const Branch = require("../models/Branch");
+const { all } = require("../routers");
 
 module.exports.index = asyncHandler(async (req, res, next) => {
   const studentCount = await Student.count();
   const teacherCount = await Teacher.count();
   const lessonCount = await Lesson.count();
+  const groupCount = await Group.count();
+  const classCount = await Class.count();
+
   res.render("admin/index", {
     title: "Anasayfa",
     studentCount: studentCount,
     teacherCount: teacherCount,
     lessonCount: lessonCount,
+    groupCount: groupCount,
+    classCount: classCount,
   });
 });
 
@@ -53,6 +62,9 @@ module.exports.student = asyncHandler(async (req, res, next) => {
       {
         model: Group,
         include: [Teacher],
+      },
+      {
+        model: Truancy,
       },
       "parent",
     ],
@@ -122,7 +134,7 @@ module.exports.studentSettingsGet = asyncHandler(async (req, res, next) => {
         model: Group,
         attributes: ["name", "id"],
       },
-    ],
+    ]
   });
   const groups = await Group.findAll();
   res.render("admin/student-settings", {
@@ -153,6 +165,76 @@ module.exports.studentSettingsPost = asyncHandler(async (req, res, next) => {
   req.session.alert = alert;
   res.redirect(`/student/${id}`);
 });
+
+module.exports.studentTruancies = asyncHandler(async (req, res, next) => {
+  const id = req.params.id
+  const alert = req.session.alert
+  delete req.session.alert;
+  const size = parseInt(process.env.PAGINATION_SIZE);
+  const { page = 0 } = req.query;
+  const { rows, count } = await Truancy.findAndCountAll({
+    where: {
+      studentId: id
+    },
+    raw: true,
+    limit: size,
+    offset: page * size
+  })
+  res.render("admin/student-truancies", {
+    title: "Devamsızlıkları görüntüle",
+    truancies: rows,
+    totalItems: count,
+    totalPages: Math.ceil(count / size),
+    currentPage: page,
+    alert: alert
+  })
+})
+
+module.exports.studentTruancieDelete = asyncHandler(async (req, res, next) => {
+  const id = req.params.id
+  const truancy = await Truancy.findByPk(id)
+  truancy.destroy()
+  req.session.alert = {
+    message: "Devamsızlık bilgisi başarıyla silindi",
+    type: "success",
+  }
+  res.redirect(`/student/${id}/truancies`)
+})
+
+module.exports.teacherLeaves = asyncHandler(async (req, res, next) => {
+  const id = req.params.id
+  const alert = req.session.alert
+  delete req.session.alert;
+  const size = parseInt(process.env.PAGINATION_SIZE);
+  const { page = 0 } = req.query;
+  const { rows, count } = await Leave.findAndCountAll({
+    where: {
+      teacherId: id
+    },
+    raw: true,
+    limit: size,
+    offset: page * size
+  })
+  res.render("admin/teacher-leaves", {
+    title: "İzinleri görüntüle",
+    leaves: rows,
+    totalItems: count,
+    totalPages: Math.ceil(count / size),
+    currentPage: page,
+    alert: alert
+  })
+})
+
+module.exports.teacherLeaveDelete = asyncHandler(async (req, res, next) => {
+  const id = req.params.id
+  const leave = await Leave.findByPk(id)
+  leave.destroy()
+  req.session.alert = {
+    message: "İzin bilgisi başarıyla silindi",
+    type: "success",
+  }
+  res.redirect(`/teacher/${id}/leaves`)
+})
 
 module.exports.parentSettingsGet = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
@@ -188,7 +270,12 @@ module.exports.teachers = asyncHandler(async (req, res, next) => {
   const { rows, count } = await Teacher.findAndCountAll({
     limit: size,
     offset: page * size,
+    include: [{
+      model: Branch,
+      attributes: ["name"]
+    }]
   });
+  console.log(rows[0])
   res.render("admin/teachers", {
     title: "Öğretmenler",
     teachers: rows,
@@ -200,16 +287,101 @@ module.exports.teachers = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.teacher = asyncHandler(async (req, res, next) => {
+  const alert = req.session.alert;
+  delete req.session.alert;
+
+  const id = req.params.id;
   const size = parseInt(process.env.PAGINATION_SIZE);
   const { page = 0, filter } = req.query;
 
   const teacher = await Teacher.findOne({
-    limit: size,
-    offset: page * size,
+    where: {
+      id: id
+    },
+    include: [{
+      model: Branch,
+      attributes: ["name"]
+    },
+    {
+      model: Leave
+    }],
   });
 
   res.render("admin/teacher-profile", {
-    title: "{teacher.fullName}",
+    title: `${teacher.fullName}`,
     teacher: teacher,
+    alert: alert
   });
 });
+
+module.exports.teacherSettingsGet = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const teacher = await Teacher.findByPk(id, {
+    include: [{
+      model: Branch,
+    }]
+  });
+  const branches = await Branch.findAll();
+  res.render("admin/teacher-settings", {
+    title: `${teacher.fullName} - Öğretmen ayarları`,
+    teacher: teacher,
+    branches: branches,
+    csrfToken: req.csrfToken(),
+  });
+});
+
+module.exports.teacherSettingsPost = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const { fullName = null, telephoneNumber = null, branchId } = req.body;
+
+  await Teacher.update(
+    {
+      fullName: fullName.toUpperCase(),
+      telephoneNumber: telephoneNumber,
+      branchId: branchId,
+    },
+    { where: { id: id } }
+  );
+
+  let alert = {
+    message: "Öğretmen bilgileri başarıyla güncellendi",
+    type: "success",
+  };
+  req.session.alert = alert;
+  res.redirect(`/teacher/${id}`);
+});
+
+module.exports.studentTruanciesAdd = asyncHandler(async (req, res, next) => {
+  const size = parseInt(process.env.PAGINATION_SIZE);
+  const { page = 0, filter } = req.query;
+  const { rows, count } = await Student.findAndCountAll({
+    include: [
+      {
+        model: Group,
+        attributes: ["name"],
+      },
+      {
+        model: Parent,
+        attributes: ["telephoneNumber"],
+      },
+    ],
+    limit: size,
+    offset: page * size,
+  });
+  res.render("admin/truancies", {
+    title: "Öğrenciler",
+    students: rows,
+    totalItems: count,
+    totalPages: Math.ceil(count / size),
+    currentPage: page,
+    filter: filter,
+    csrfToken: req.csrfToken()
+  });
+});
+
+module.exports.studentTruanciesConfirm = asyncHandler(async (req, res, next) => {
+  // res.render(`admin/truancies-confirm`, {
+  //   title: "Devamsızlıkları onayla",
+  // });
+  res.send(req.body)
+})

@@ -1,15 +1,19 @@
+const Truancy = require("../models/Truancy.js");
+const Leave = require("../models/Leave.js");
 const Lesson = require("../models/Lesson.js");
 const Student = require("../models/Student.js");
 const Teacher = require("../models/Teacher.js");
 const User = require("../models/User.js");
-const Grade = require("../models/PracticeExamTYT.js");
 const Class = require("../models/Class.js");
+const Branch = require("../models/Branch.js");
 const Parent = require("../models/Parent.js");
 const Role = require("../models/Role.js");
 const Level = require("../models/Level.js");
 const Group = require("../models/Group.js");
 const Field = require("../models/Field.js");
 const GroupLessons = require("../models/GroupLessons.js");
+const PracticeExamAYT = require("../models/PracticeExamAYT.js");
+const PracticeExamTYT = require("../models/PracticeExamTYT.js");
 
 const { sequelize } = require("../data/databaseConnect.js");
 
@@ -26,9 +30,25 @@ const relationships = async function () {
   Lesson.belongsToMany(Teacher, { through: "Lesson_Teachers" });
   Teacher.belongsToMany(Lesson, { through: "Lesson_Teachers" });
 
-  // Notlar ve Öğrenci arasındaki ilişki
-  Grade.belongsTo(Student);
-  Student.hasMany(Grade, { foreignKey: "studentId" });
+  // AYT ve Öğrenci arasındaki ilişki
+  PracticeExamAYT.belongsTo(Student);
+  Student.hasMany(PracticeExamAYT, { foreignKey: "studentId" });
+
+  // TYT ve Öğrenci arasındaki ilişki
+  PracticeExamTYT.belongsTo(Student);
+  Student.hasMany(PracticeExamTYT, { foreignKey: "studentId" });
+
+  // Branş ve öğretmen
+  Branch.hasMany(Teacher);
+  Teacher.belongsTo(Branch);
+
+  // Devamsızlık ve öğrenci
+  Student.hasMany(Truancy);
+  Truancy.belongsTo(Student);
+
+  // İzin ve öğretmen
+  Teacher.hasMany(Leave);
+  Leave.belongsTo(Teacher);
 
   // Grup ve öğrenci
   Group.hasMany(Student);
@@ -64,6 +84,7 @@ const relationships = async function () {
 
   await sequelize.sync();
 };
+
 relationships();
 
 module.exports = relationships;

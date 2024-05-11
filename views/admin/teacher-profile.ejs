@@ -2,53 +2,64 @@
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
-        <div class="text-end space-y-4">
-            <button class="btn btn-primary" type="button" id="print">Yazdır</button>
-            <% if (typeof alert != "undefined" ) { %>
-                <%- include('../partials/_alert',alert) -%>
-                    <% } %>
-                        <div class=" grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-center">
-                            <div class="border rounded-lg p-4 overflow-x-auto">
-                                <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                                    <img class="max-w-[150px] rounded-lg" src="/uploads/<%= teacher.photo %>" alt="">
-                                    <div>
-                                        <div class="flex space-x-2">
-                                            <p>İsim soyisim:</p>
-                                            <p class="text-md"><b>
-                                                    <%= teacher.fullName %>
+            <div class="text-end space-y-4">
+                <button class="btn btn-primary" type="button" id="print">Yazdır</button>
+                <div class="dropdown">
+                    <label class="btn btn-solid-primary my-2" tabindex="0">Seçenekler</label>
+                    <div class="dropdown-menu">
+                        <a tabindex="-1" href="/teacher/<%= teacher.id %>/settings" class="dropdown-item text-start text-sm link link-error link-ghost-error">Ayarları görüntüle</a>
+                        <a tabindex="-1" href="/teacher/<%= teacher.id %>/leaves" class="dropdown-item text-start text-sm link link-success link-ghost-success">İzinleri görüntüle</a>
+                    </div>
+                </div>
+                <% if (typeof alert !="undefined" ) { %>
+                    <%- include('../partials/_alert',alert) -%>
+                        <% } %>
+                            <div class=" grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-center">
+                                <div class="border rounded-lg p-4 overflow-x-auto">
+                                    <div class="flex flex-wrap space-x-8 text-nowrap items-center">
+                                        <img class="max-w-[150px] rounded-lg" src="/uploads/<%= teacher.photo %>"
+                                            alt="">
+                                        <div>
+                                            <div class="flex space-x-2">
+                                                <p>İsim soyisim:</p>
+                                                <p class="text-md"><b>
+                                                        <%= teacher.fullName %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Branş:</p>
+                                                <p class="text-md"><b>
+                                                        <%= teacher.branch.name %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Giriş tarihi:</p>
+                                                <p class="text-md"><b>
+                                                        <%= teacher.dateOfEmployment %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>İzin sayısı:</p>
+                                                <p class="text-md"><b>
+                                                    <p class="text-md"><b><%= teacher.leaves.length %></b></p>
                                                 </b></p>
-                                        </div>
-                                        <div class="flex space-x-2">
-                                            <p>Telefon no:</p>
-                                            <p class="text-md"><b>
-                                                    <%= teacher.telephoneNumber %>
-                                                </b></p>
-                                        </div>
-                                        <div class="flex space-x-2">
-                                            <p>Numara:</p>
-                                            <p class="text-md"><b>
-                                                    <%= teacher.id %>
-                                                </b></p>
-                                        </div>
-                                        <div class="flex space-x-2">
-                                            <p>Doğum tarihi:</p>
-                                            <p class="text-md"><b>
-                                                    <%= teacher.dateOfBirth %>
-                                                </b></p>
-                                        </div>
-                                        <div class="flex space-x-2">
-                                            <p>Devamsızlık:</p>
-                                            <p class="text-md"><b>YOK</b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Telefon no:</p>
+                                                <p class="text-md"><b>
+                                                        <%= teacher.telephoneNumber %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Doğum tarihi:</p>
+                                                <p class="text-md"><b>
+                                                        <%= teacher.dateOfBirth %>
+                                                    </b></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <a class="link link-error link-ghost-error"
-                                    href="/teacher/<%= teacher.id %>/settings">Ayarları
-                                    görüntüle</a>
-
                             </div>
-                        </div>
             </div>
             <%- include('../partials/_footer') -%>
                 <%- include('../partials/_scripts') -%>

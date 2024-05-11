@@ -18,7 +18,7 @@ const Student = sequelize.define("student", {
   dateOfBirth: {
     type: DataTypes.DATEONLY,
     defaultValue: new Date("2003-12-28"),
-  }
+  },
 });
 
 module.exports = Student;

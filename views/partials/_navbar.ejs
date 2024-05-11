@@ -4,11 +4,6 @@
 			<%= process.env.SITE_NAME %>
 		</a>
 	</div>
-	<!-- <div class="navbar-center">
-		<a class="navbar-item navbar-active">Home</a>
-		<a class="navbar-item">About</a>
-		<a class="navbar-item">Contact</a>
-	</div> -->
 	<div class="navbar-end">
 		<div class="avatar avatar-ring avatar-md">
 			<div class="dropdown-container">
@@ -20,7 +15,7 @@
 						<a class="dropdown-item text-sm">Profil</a>
 						<a tabindex="-1" class="dropdown-item text-sm">Ayarlar</a>
 						<br>
-						<a tabindex="-1" class="dropdown-item bg-error text-sm"><b>Çıkış yap</b></a>
+						<a href="/auth/log-out" tabindex="-1" class="dropdown-item bg-error text-sm"><b>Çıkış yap</b></a>
 					</div>
 				</div>
 			</div>
@@ -50,7 +45,7 @@
 				<div class="w-full">
 					<a href="#" class="btn btn-outline min-w-full my-1">Profil</a>
 					<a href="#" class="btn btn-outline min-w-full my-1">Ayarlar</a>
-					<a href="#" class="btn btn-error min-w-full my-1"><b>Çıkış yap</b></a>
+					<a href="/auth/log-out" class="btn btn-error min-w-full my-1"><b>Çıkış yap</b></a>
 				</div>
 			</div>
 		</div>
