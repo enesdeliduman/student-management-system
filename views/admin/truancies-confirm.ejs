@@ -2,25 +2,24 @@
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
+
             <!-- Table -->
-            <div class="flex min-w-full overflow-x-auto justify-center">
-                <table class="table-compact table max-w-8xl ">
-                    <thead>
-                        <tr>
-                            <th>Ad soyad</th>
-                            <th>Veli Telefon No</th>
-                            <th>Açıklama</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% let count=0 %>
+            <form action="" method="post">
+                <div class=" min-w-full overflow-x-auto justify-center">
+                    <table class="table-compact table max-w-8xl ">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Ad soyad</th>
+                                <th>Group</th>
+                                <th>Veli ad soyad</th>
+                                <th>Veli Telefon No</th>
+                                <th>Açıklama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <% students.forEach(student=> { %>
                                 <tr>
-                                    <td>
-                                        <img class="max-w-[130px] h-auto rounded-lg" src="/uploads/<%= student.photo %>"
-                                            alt="<%= student.fullName %>">
-                                    </td>
                                     <td>
                                         <%= student.id %>
                                     </td>
@@ -30,18 +29,30 @@
                                     <td>
                                         <%= student.group.name %>
                                     </td>
-                                    <td class="max-w-min">
-                                        <a class="link link-primary link-ghost-primary"
-                                            href="student/<%= student.id %>">Profili görüntüle</a>
+                                    <td>
+                                        <%= student.parent.fullName %>
+                                    </td>
+                                    <td>
+                                        <%= student.parent.telephoneNumber %>
+                                    </td>
+                                    <td>
+                                        <div class="form-control">
+                                            <input placeholder="Type here" type="text" name="<%=student.id%>" value="Tüm gün"
+                                                class="input max-w-full" />
+                                        </div>
                                     </td>
                                 </tr>
                                 <% }) %>
-                    </tbody>
-                </table>
-            </div>
-            <%- include('../partials/_pagination') -%>
-                <%- include('../partials/_footer') -%>
-                    <%- include('../partials/_scripts') -%>
+
+                        </tbody>
+                    </table>
+                </div>
+                <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+                <input type="hidden" name="type" value="last" />
+                <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam et</button>
+            </form>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
     </body>
 
     </html>

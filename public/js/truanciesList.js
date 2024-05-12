@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 addIcons.forEach(addIcon => {
+    console.log(addIcon)
     addIcon.addEventListener("click", function (event) {
         const clickedElementId = parseInt(event.target.id);
         if (!clickedElementIds.includes(clickedElementId)) {

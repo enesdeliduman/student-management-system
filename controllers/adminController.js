@@ -351,7 +351,7 @@ module.exports.teacherSettingsPost = asyncHandler(async (req, res, next) => {
   res.redirect(`/teacher/${id}`);
 });
 
-module.exports.studentTruanciesAdd = asyncHandler(async (req, res, next) => {
+module.exports.studentTruanciesAddGet = asyncHandler(async (req, res, next) => {
   const size = parseInt(process.env.PAGINATION_SIZE);
   const { page = 0, filter } = req.query;
   const { rows, count } = await Student.findAndCountAll({
@@ -379,9 +379,35 @@ module.exports.studentTruanciesAdd = asyncHandler(async (req, res, next) => {
   });
 });
 
-module.exports.studentTruanciesConfirm = asyncHandler(async (req, res, next) => {
-  // res.render(`admin/truancies-confirm`, {
-  //   title: "Devamsızlıkları onayla",
-  // });
-  res.send(req.body)
+module.exports.studentTruanciesAddPost = asyncHandler(async (req, res, next) => {
+  if (req.body.type == "first") {
+    const stringTypes = req.body.clickedElementIds.slice(1, -1).split(",")
+    const ids = []
+    const studentsData = [];
+    for (const id of stringTypes) {
+      ids.push(parseInt(id))
+    }
+    for (const studentId of ids) {
+      const student = await Student.findByPk(studentId, {
+        include: [
+          {
+            model: Parent,
+            attributes: ["fullName", "telephoneNumber"]
+          },
+          {
+            model: Group,
+            attributes: ["name"]
+          }
+        ]
+      });
+      studentsData.push(student);
+    }
+    res.render("admin/truancies-confirm", {
+      title: "Devamsızlık kaydı onayı",
+      students: studentsData,
+      csrfToken: req.csrfToken()
+    })
+  } else {
+    res.send(req.body)
+  }
 })

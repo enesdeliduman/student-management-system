@@ -48,7 +48,7 @@ app.use(routers);
 app.use(ErrorHandler);
 
 // Veritabanı bağlantısı
-(async () => {
+(async () => {  
     await connectDB();
     // await relationships();
     // await createDummyData();

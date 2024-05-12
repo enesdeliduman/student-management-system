@@ -1,4 +1,6 @@
-<%- include('../partials/_head') -%>
+
+
+    <%- include('../partials/_head') -%>
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
@@ -19,8 +21,6 @@
                 <%- include('../partials/_noData') -%>
 
                     <% } else { %>
-                        <form method="post" id="form">
-                            <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
                             <div class="flex min-w-full overflow-x-auto justify-center">
                                 <table class="table-compact table max-w-8xl ">
                                     <thead>
@@ -28,12 +28,11 @@
                                             <th></th>
                                             <th>Numara</th>
                                             <th>Ad soyad</th>
-                                            <th>Grup</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% let count=0 %>
-                                            <% students.forEach(student=> { %>
+                                            <% students.students.forEach(student=> { %>
                                                 <tr>
                                                     <td class="theAddIconParent">
                                                         <i class="text-success fa-solid fa-plus fa-xl add cursor-pointer"
@@ -45,9 +44,6 @@
                                                     <td class="name">
                                                         <%= student.fullName %>
                                                     </td>
-                                                    <td>
-                                                        <%= student.group.name %>
-                                                    </td>
                                                 </tr>
                                                 <% }) %>
 
@@ -55,12 +51,9 @@
                                 </table>
                             </div>
                             <% } %>
-                                <input type="hidden" name="clickedElementIds" id="clickedElementIds" />
-                                <input type="hidden" name="type" value="first" />
-                                <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam et</button>
-                        </form>
 
-                        <%- include('../partials/_pagination') -%>
+                                <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam et</button>
+
                             <%- include('../partials/_footer') -%>
                                 <%- include('../partials/_scripts') -%>
 

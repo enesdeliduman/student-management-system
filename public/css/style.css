@@ -1834,6 +1834,10 @@ html {
   position: relative;
   width: 100%;
 }
+.alert-error {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--red-4)/var(--tw-bg-opacity));
+}
 .table {
   --tw-border-spacing-x: 0px;
   --tw-border-spacing-y: 0px;
@@ -2510,11 +2514,11 @@ body {
 .hidden {
   display: none;
 }
-.h-auto {
-  height: auto;
-}
 .h-full {
   height: 100%;
+}
+.h-screen {
+  height: 100vh;
 }
 .min-h-0 {
   min-height: 0px;
@@ -2525,8 +2529,23 @@ body {
 .min-w-full {
   min-width: 100%;
 }
-.max-w-\[130px\] {
-  max-width: 130px;
+.min-w-\[\] {
+  min-width: ;
+}
+.min-w-\[50px\] {
+  min-width: 50px;
+}
+.min-w-\[550px\] {
+  min-width: 550px;
+}
+.min-w-\[350px\] {
+  min-width: 350px;
+}
+.min-w-\[250px\] {
+  min-width: 250px;
+}
+.min-w-\[150px\] {
+  min-width: 150px;
 }
 .max-w-\[150px\] {
   max-width: 150px;
@@ -2621,8 +2640,14 @@ body {
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
+.overflow-scroll {
+  overflow: scroll;
+}
 .overflow-x-auto {
   overflow-x: auto;
+}
+.overflow-x-scroll {
+  overflow-x: scroll;
 }
 .text-nowrap {
   text-wrap: nowrap;
