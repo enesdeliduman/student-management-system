@@ -41,10 +41,10 @@ module.exports.signInPost = asyncHandler(async (req, res, next) => {
     if (match) {
       req.session.role = user.role.name;
       req.session.isAuth = true;
+      req.session.userId = user.id;
       req.session.fullName = user.student
         ? user.student.fullName
         : user.teacher.fullName;
-      console.log(req.session);
       return res.redirect("/");
     }
     req.session.alert = {

@@ -1,6 +1,4 @@
-
-
-    <%- include('../partials/_head') -%>
+<%- include('../partials/_head') -%>
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
@@ -21,6 +19,7 @@
                 <%- include('../partials/_noData') -%>
 
                     <% } else { %>
+                        <form method="post">
                             <div class="flex min-w-full overflow-x-auto justify-center">
                                 <table class="table-compact table max-w-8xl ">
                                     <thead>
@@ -35,8 +34,15 @@
                                             <% students.students.forEach(student=> { %>
                                                 <tr>
                                                     <td class="theAddIconParent">
-                                                        <i class="text-success fa-solid fa-plus fa-xl add cursor-pointer"
-                                                            id="<%= student.id %>"></i>
+                                                        <div>
+                                                            <label for="check<%=student.id%>">
+                                                                <i
+                                                                    class="text-success fa-solid fa-plus fa-xl add cursor-pointer">
+                                                                </i>
+                                                            </label>
+                                                            <input type="checkbox" hidden id="check<%=student.id%>"
+                                                                name="<%=student.id%>" class="checboxAttendance" />
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         <%= student.id %>
@@ -51,11 +57,13 @@
                                 </table>
                             </div>
                             <% } %>
+                                <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
 
                                 <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam et</button>
+                        </form>
 
-                            <%- include('../partials/_footer') -%>
-                                <%- include('../partials/_scripts') -%>
+                        <%- include('../partials/_footer') -%>
+                            <%- include('../partials/_scripts') -%>
 
     </body>
 

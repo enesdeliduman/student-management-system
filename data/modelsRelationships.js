@@ -14,6 +14,7 @@ const Field = require("../models/Field.js");
 const GroupLessons = require("../models/GroupLessons.js");
 const PracticeExamAYT = require("../models/PracticeExamAYT.js");
 const PracticeExamTYT = require("../models/PracticeExamTYT.js");
+const Attendance = require("../models/Attendance.js");
 
 const { sequelize } = require("../data/databaseConnect.js");
 
@@ -41,6 +42,15 @@ const relationships = async function () {
   // Branş ve öğretmen
   Branch.hasMany(Teacher);
   Teacher.belongsTo(Branch);
+
+  // Yoklama ve öğrenci
+  Student.belongsToMany(Attendance, { through: "StudentAttendances" });
+  Attendance.belongsToMany(Student, { through: "StudentAttendances" });
+
+  // Yoklama ve öğretmen
+  Teacher.belongsToMany(Attendance, { through: "TeacherAttendance" });
+  Attendance.belongsToMany(Teacher, { through: "TeacherAttendance" });
+
 
   // Devamsızlık ve öğrenci
   Student.hasMany(Truancy);

@@ -15,6 +15,7 @@ const Role = require('../models/Role.js')
 const bcrypt = require('bcrypt')
 const { sequelize } = require('./databaseConnect.js')
 const Truancy = require('../models/Truancy.js')
+const Attendance = require('../models/Attendance.js')
 
 module.exports.createDummyData = async () => {
   try {
@@ -158,7 +159,12 @@ module.exports.createDummyData = async () => {
       { fullName: 'Kerim Arabacı', photo: 'photo2.jpg' },
       { fullName: 'Mert Ulak', photo: 'photo2.jpg' }
     ])
-
+    const attendances = await Attendance.bulkCreate([
+      {
+        studentId: students[0].id,
+        teacherId: teachers[0].id
+      }
+    ])
     const lessons = await Lesson.bulkCreate([
       { name: 'Lesson 1' },
       { name: 'Lesson 2' },
@@ -1108,6 +1114,7 @@ module.exports.createDummyData = async () => {
       { teacherId: 9, type: "Ücretli" },
       { teacherId: 10, type: "Ücretli" },
     ])
+
 
     // Veli ve öğrenci
     await parents[0].addStudent(students[0])
