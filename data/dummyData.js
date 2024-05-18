@@ -22,28 +22,28 @@ module.exports.createDummyData = async () => {
     await sequelize.sync({ force: true })
 
     const parents = await Parent.bulkCreate([
-      { fullName: 'Parent 1', telephoneNumber: '1169999250' },
-      { fullName: 'Parent 2', telephoneNumber: '5105994374' },
-      { fullName: 'Parent 3', telephoneNumber: '1795209956' },
-      { fullName: 'Parent 4', telephoneNumber: '3850834346' },
-      { fullName: 'Parent 4', telephoneNumber: '3850834346' },
-      { fullName: 'Parent 5', telephoneNumber: '7481006621' },
-      { fullName: 'Parent 6', telephoneNumber: '3175817427' },
-      { fullName: 'Parent 7', telephoneNumber: '4135221094' },
-      { fullName: 'Parent 8', telephoneNumber: '1413853514' },
-      { fullName: 'Parent 9', telephoneNumber: '8164242074' },
-      { fullName: 'Parent 10', telephoneNumber: '4240593014' },
-      { fullName: 'Parent 11', telephoneNumber: '1169999250' },
-      { fullName: 'Parent 12', telephoneNumber: '5105994374' },
-      { fullName: 'Parent 13', telephoneNumber: '1795209956' },
-      { fullName: 'Parent 14', telephoneNumber: '3850834346' },
-      { fullName: 'Parent 14', telephoneNumber: '3850834346' },
-      { fullName: 'Parent 15', telephoneNumber: '7481006621' },
-      { fullName: 'Parent 16', telephoneNumber: '3175817427' },
-      { fullName: 'Parent 17', telephoneNumber: '4135221094' },
-      { fullName: 'Parent 18', telephoneNumber: '1413853514' },
-      { fullName: 'Parent 19', telephoneNumber: '8164242074' },
-      { fullName: 'Parent 20', telephoneNumber: '4240593014' }
+      { fullName: 'Parent 1', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 2', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 3', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 4', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 4', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 5', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 6', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 7', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 8', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 9', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 10', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 11', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 12', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 13', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 14', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 14', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 15', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 16', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 17', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 18', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 19', telephoneNumber: "5419440253" },
+      { fullName: 'Parent 20', telephoneNumber: "5419440253" }
     ])
 
     const roles = await Role.bulkCreate([
@@ -158,12 +158,6 @@ module.exports.createDummyData = async () => {
       { fullName: 'Zerrin Paşazade', photo: 'photo2.jpg' },
       { fullName: 'Kerim Arabacı', photo: 'photo2.jpg' },
       { fullName: 'Mert Ulak', photo: 'photo2.jpg' }
-    ])
-    const attendances = await Attendance.bulkCreate([
-      {
-        studentId: students[0].id,
-        teacherId: teachers[0].id
-      }
     ])
     const lessons = await Lesson.bulkCreate([
       { name: 'Lesson 1' },
@@ -1242,9 +1236,20 @@ module.exports.createDummyData = async () => {
     await levels[4].addGroups(groups[9])
     await levels[4].addGroups(groups[9])
 
+    // const attendances = await Attendance.bulkCreate([{
+    //   lesson: 1
+    // }])
+    // await students[0].addAttendance(attendances[0], {
+    //   through: {
+    //     teacher: teachers[0]
+    //   }
+    // })
     // Ders ve grup
     await lessons[0].addGroup(groups[0], {
-      through: { teacherId: teachers[0].id }
+      through:
+      {
+        teacherId: teachers[0].id
+      }
     })
     await lessons[1].addGroup(groups[0], {
       through: { teacherId: teachers[1].id }

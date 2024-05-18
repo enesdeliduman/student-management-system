@@ -1,0 +1,68 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+
+            <!-- Filter and Search -->
+            <form method="post">
+
+                <!-- Table -->
+                <% if (Object.keys(students).length===0) { %>
+                    <%- include('../partials/_noData') -%>
+                        <% } else { %>
+                            <div class="flex min-w-full overflow-x-auto justify-center">
+                                <table class="table-compact table max-w-8xl">
+                                    <thead>
+                                        <tr>
+                                            <th>Numara</th>
+                                            <th>Ad soyad</th>
+                                            <th>Grup</th>
+                                            <th>Devamsızlık Saati</th>
+                                            <th>Veli Ad soyad</th>
+                                            <th>Veli telefon no</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% Object.keys(students).forEach(studentId=> { %>
+                                            <% const student=students[studentId]; %>
+                                                <tr>
+                                                    <td>
+                                                        <%= studentId %>
+                                                    </td>
+                                                    <td>
+                                                        <%= student.fullName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= student.groupName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= Object.keys(student.lessons).length===5 ? "Tüm gün" :
+                                                            `${Object.keys(student.lessons).length} ders` %>
+                                                    </td>
+                                                    <td>
+                                                        <%= student.parentInfo.fullName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= student.parentInfo.telephoneNumber %>
+                                                    </td>
+                                                </tr>
+                                                <input type="hidden" name=" <%= studentId %>"
+                                                    value="<%= Object.keys(student.lessons).length===5 ? "Tüm gün" :
+                                                    `${Object.keys(student.lessons).length} ders` %>">
+                                                <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <% } %>
+
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+
+                                <button type="submit" class="rounded-lg btn btn-primary btn-block mt-4">Devam
+                                    et</button>
+            </form>
+
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>

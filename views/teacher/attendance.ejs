@@ -3,67 +3,81 @@
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
             <!-- Filter and Search -->
-            <div class="w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
-                <input type="text" id="search" class="input input-lg max-w-full pl-10" placeholder="İsim giriniz" />
-                <select class="select">
-                    <option>Seçiniz</option>
-                    <option>A - Z</option>
-                    <option>Başarı ortalaması (önce büyük)</option>
-                    <option>Başarı ortalaması (önce küçük)</option>
-                    <option>Doğum tarihi (önce büyük)</option>
-                    <option>Doğum tarihi (önce küçük)</option>
-                </select>
+            <div class="w-full  space-x-2 mb-4 justify-end">
+                <form method="post">
+                    <select class="select" name="lesson" id="selected">
+                        <% for( let i=0; i < lessonCount; i++ ) { %>
+                            <option value="<%=i+1%>" <%=(lesson==i+1) ? "selected" :"" %>>
+                                <%= i+1 %>. Ders
+                            </option>
+                            <% } %>
+                    </select>
             </div>
             <!-- Table -->
             <% if (students.length==0) { %>
                 <%- include('../partials/_noData') -%>
 
                     <% } else { %>
-                        <form method="post">
-                            <div class="flex min-w-full overflow-x-auto justify-center">
-                                <table class="table-compact table max-w-8xl ">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Numara</th>
-                                            <th>Ad soyad</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% let count=0 %>
-                                            <% students.students.forEach(student=> { %>
-                                                <tr>
-                                                    <td class="theAddIconParent">
-                                                        <div>
-                                                            <label for="check<%=student.id%>">
-                                                                <i
-                                                                    class="text-success fa-solid fa-plus fa-xl add cursor-pointer">
-                                                                </i>
-                                                            </label>
-                                                            <input type="checkbox" hidden id="check<%=student.id%>"
-                                                                name="<%=student.id%>" class="checboxAttendance" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <%= student.id %>
-                                                    </td>
-                                                    <td class="name">
-                                                        <%= student.fullName %>
-                                                    </td>
-                                                </tr>
-                                                <% }) %>
+                        <div class="flex min-w-full overflow-x-auto justify-center">
+                            <table class="table-compact table max-w-8xl ">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Numara</th>
+                                        <th>Ad soyad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% let count=0 %>
+                                        <% students.students.forEach(student=> { %>
+                                            <tr>
+                                                <td class="theAddIconParent">
+                                                    <div>
+                                                        <label for="check<%=student.id%>">
+                                                            <i
+                                                                class="<%= obj.studentIds.includes(student.id) ? 'text-error fa-solid fa-x' : 'text-success fa-solid fa-plus' %> fa-xl add cursor-pointer">
+                                                            </i>
+                                                        </label>
+                                                        <input type="checkbox" id="check<%=student.id%>"
+                                                            name="<%=student.id%>" class="checboxAttendance"
+                                                            <%=confirm=="n" ?"":"disabled" %> hidden/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <%= student.id %>
+                                                </td>
+                                                <td class="name">
+                                                    <%= student.fullName %>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% } %>
+                            <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+                            <% if (confirm=="n" ) { %>
+                                <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam
+                                    et</button>
+                                <% } else { %>
+                                    <p class="mt-4">Yoklamayı alan <b>
+                                            <%= obj.teacherFullName %>
+                                        </b></p>
+                                    <% } %>
+                                        </form>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <% } %>
-                                <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
-
-                                <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam et</button>
-                        </form>
-
-                        <%- include('../partials/_footer') -%>
-                            <%- include('../partials/_scripts') -%>
+                                        <%- include('../partials/_footer') -%>
+                                            <%- include('../partials/_scripts') -%>
+                                                <script>
+                                                    const selected = document.querySelector("#selected")
+                                                    selected.addEventListener("change", () => {
+                                                        newURL(selected.value)
+                                                    })
+                                                    function newURL(value) {
+                                                        let url = new URL(window.location.href);
+                                                        newURL = window.location.href = window.location.origin + window.location.pathname + "?lesson=" + value
+                                                    }
+                                                </script>
 
     </body>
 

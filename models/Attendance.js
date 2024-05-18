@@ -9,13 +9,12 @@ const Attendance = sequelize.define("attendances", {
         type: DataTypes.DATEONLY,
         defaultValue: Date.now
     },
-    studentId: {
-        type: DataTypes.INTEGER
+    lesson: {
+        type: DataTypes.INTEGER,
     },
-    teacherId: {
-        type: DataTypes.INTEGER
+    confirm: {
+        type: DataTypes.BOOLEAN,
+        defaultValue:false
     }
 });
-
-
 module.exports = Attendance;

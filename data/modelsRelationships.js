@@ -43,13 +43,17 @@ const relationships = async function () {
   Branch.hasMany(Teacher);
   Teacher.belongsTo(Branch);
 
-  // Yoklama ve öğrenci
-  Student.belongsToMany(Attendance, { through: "StudentAttendances" });
-  Attendance.belongsToMany(Student, { through: "StudentAttendances" });
-
   // Yoklama ve öğretmen
-  Teacher.belongsToMany(Attendance, { through: "TeacherAttendance" });
-  Attendance.belongsToMany(Teacher, { through: "TeacherAttendance" });
+  Teacher.hasMany(Attendance)
+  Attendance.belongsTo(Teacher)
+
+  // Yoklama ve öğrenci
+  Attendance.belongsToMany(Student, { through: "AttendanceStudent" });
+  Student.belongsToMany(Attendance, { through: "AttendanceStudent" });
+
+  // Yoklama ve grup
+  Group.hasMany(Attendance)
+  Attendance.belongsTo(Group)
 
 
   // Devamsızlık ve öğrenci
