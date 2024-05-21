@@ -170,6 +170,8 @@ module.exports.studentSettingsPost = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.attendancesConfirmGet = asyncHandler(async (req, res, next) => {
+  const alert = req.session.alert
+  delete req.session.alert
   const attendances = await Attendance.findAll({
     where: {
       confirm: false
@@ -190,35 +192,34 @@ module.exports.attendancesConfirmGet = asyncHandler(async (req, res, next) => {
     },
     raw: true
   });
-
   let obj = {};
-
   attendances.forEach(student => {
     const studentId = student["students.id"];
     const fullName = student["students.fullName"];
     const groupName = student["students.group.name"];
     const lessonNumber = student.lesson;
     const parent = student["parent.fullName"];
-
-    if (!obj.hasOwnProperty(studentId)) {
-      obj[studentId] = {
-        fullName: fullName,
-        groupName: groupName,
-        lessons: {},
-        parentInfo: {}
-      };
+    if (studentId !== null) {
+      if (!obj.hasOwnProperty(studentId)) {
+        obj[studentId] = {
+          fullName: fullName,
+          groupName: groupName,
+          lessons: {},
+          parentInfo: {}
+        };
+      }
+      obj[studentId].lessons[lessonNumber] = true;
+      obj[studentId].parentInfo.fullName = student["students.parent.fullName"]
+      obj[studentId].parentInfo.telephoneNumber = student["students.parent.telephoneNumber"]
     }
-    obj[studentId].lessons[lessonNumber] = true;
-    obj[studentId].parentInfo.fullName = student["students.parent.fullName"]
-    obj[studentId].parentInfo.telephoneNumber = student["students.parent.telephoneNumber"]
   });
   res.render("admin/attendances-confirm", {
     title: "Devamsızlıkları onayla",
     csrfToken: req.csrfToken(),
-    students: obj
+    students: obj,
+    alert: alert
   });
 });
-
 module.exports.attendancesConfirmPost = asyncHandler(async (req, res, next) => {
   const list = []
   for (let key in req.body) {
@@ -251,8 +252,12 @@ module.exports.attendancesConfirmPost = asyncHandler(async (req, res, next) => {
       date: Date.now(),
     }
   })
-  res.send(list)
-  // res.redirect("/attendances/confirm");
+  let alert = {
+    message: "Öğrenci bilgileri başarıyla güncellendi",
+    type: "success",
+  };
+  req.session.alert = alert;
+  res.redirect("/attendances/confirm");
 });
 
 module.exports.studentTruancies = asyncHandler(async (req, res, next) => {

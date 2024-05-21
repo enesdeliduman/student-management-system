@@ -21,14 +21,14 @@ module.exports.attendanceGroups = asyncHandler(async (req, res, next) => {
     })
 });
 module.exports.attendance = asyncHandler(async (req, res, next) => {
+    const groupId = req.params.groupId
+    const { lesson = 1 } = req.query;
     let now = new Date
     let confirm
     let obj = {
         studentIds: [],
         teacherFullName: ""
     }
-    const groupId = req.params.groupId
-    const { lesson = 1 } = req.query;
     const students = await Group.findByPk(req.params.groupId, {
         include: [
             {
@@ -69,10 +69,13 @@ module.exports.attendance = asyncHandler(async (req, res, next) => {
     })
     attendances.forEach(attendance => {
         const studentId = attendance['students.id'];
-        if (studentId !== undefined) {
+        if (studentId !== undefined || null) {
             obj.studentIds.push(studentId);
         }
     });
+    const group = await Group.findByPk(groupId, {
+        attributes:["name"]
+    })
     if (attendances.length >= 1) {
         confirm = "y"
         obj.teacherFullName = attendances[0]["teacher.fullName"]
@@ -80,7 +83,7 @@ module.exports.attendance = asyncHandler(async (req, res, next) => {
         confirm = "n"
     }
     res.render("teacher/attendance", {
-        title: `${req.params.groupId} - Yoklama al`,
+        title: `${group.name} - Yoklama al`,
         students: students,
         lessonCount: process.env.LESSON_COUNT,
         lesson: lesson,
@@ -101,15 +104,23 @@ module.exports.attendanceFinal = asyncHandler(async (req, res, next) => {
             }
         ]
     })
-    const att = await Attendance.create({
+    let students = req.body;
+    delete students.lesson;
+    delete students._csrf;
+
+    console.log(Object.keys(students).length);
+    const attendance = await Attendance.create({
         lesson: lesson,
         teacherId: teacher.id,
         groupId: groupId
     })
-    for (const key in req.body) {
-        if (key !== '_csrf') {
-            const student = await Student.findByPk(key)
-            await att.addStudent(student);
+    if (Object.keys(students).length !== 0) {
+        for (const key in req.body) {
+            if (key !== '_csrf') {
+                console.log("AKMLSJNHJBCKNLMŞLSFDBKNL JKDFNLVŞLMKDF KJELRPEVÖRMBKGFL KLMOLVÖMKGBL FMBKLVFD", key)
+                const student = await Student.findByPk(key)
+                await attendance.addStudent(student);
+            }
         }
     }
     res.redirect(`/teacher/attendance/${req.params.groupId}?lesson=${lesson}`)

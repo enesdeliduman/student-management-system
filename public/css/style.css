@@ -2498,6 +2498,9 @@ body {
 .mt-8 {
   margin-top: 2rem;
 }
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .flex {
   display: flex;
 }
@@ -2513,17 +2516,36 @@ body {
 .h-full {
   height: 100%;
 }
+.h-48 {
+  height: 12rem;
+}
 .min-h-0 {
   min-height: 0px;
+}
+.min-h-full {
+  min-height: 100%;
+}
+.min-h-max {
+  min-height: -moz-max-content;
+  min-height: max-content;
 }
 .w-full {
   width: 100%;
 }
+.w-48 {
+  width: 12rem;
+}
 .min-w-full {
   min-width: 100%;
 }
+.min-w-\[300px\] {
+  min-width: 300px;
+}
 .max-w-\[150px\] {
   max-width: 150px;
+}
+.max-w-\[400px\] {
+  max-width: 400px;
 }
 .max-w-full {
   max-width: 100%;
@@ -2537,6 +2559,9 @@ body {
 }
 .max-w-sm {
   max-width: 24rem;
+}
+.max-w-\[300px\] {
+  max-width: 300px;
 }
 .border-collapse {
   border-collapse: collapse;
@@ -2688,6 +2713,14 @@ body {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .pl-10 {
   padding-left: 2.5rem;

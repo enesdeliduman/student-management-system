@@ -4,14 +4,16 @@
         <%- include('../partials/_navbar') -%>
             <!-- Filter and Search -->
             <div class="w-full  space-x-2 mb-4 justify-end">
-                <form method="post">
-                    <select class="select" name="lesson" id="selected">
-                        <% for( let i=0; i < lessonCount; i++ ) { %>
-                            <option value="<%=i+1%>" <%=(lesson==i+1) ? "selected" :"" %>>
-                                <%= i+1 %>. Ders
-                            </option>
-                            <% } %>
-                    </select>
+                <% if (confirm=="n" ) { %>
+                    <form method="post">
+                        <% } %>
+                        <select class="select" name="lesson" id="selected">
+                            <% for( let i=0; i < lessonCount; i++ ) { %>
+                                <option value="<%=i+1%>" <%=(lesson==i+1) ? "selected" :"" %>>
+                                    <%= i+1 %>. Ders
+                                </option>
+                                <% } %>
+                                    </select>
             </div>
             <!-- Table -->
             <% if (students.length==0) { %>
@@ -59,12 +61,14 @@
                             <% if (confirm=="n" ) { %>
                                 <button type="send" class="rounded-lg btn btn-primary btn-block mt-4">Devam
                                     et</button>
-                                <% } else { %>
+                                </form>
+                                    <% } else { %>
                                     <p class="mt-4">Yoklamayı alan <b>
                                             <%= obj.teacherFullName %>
                                         </b></p>
                                     <% } %>
-                                        </form>
+                                    
+
 
                                         <%- include('../partials/_footer') -%>
                                             <%- include('../partials/_scripts') -%>

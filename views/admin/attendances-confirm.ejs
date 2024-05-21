@@ -4,14 +4,14 @@
         <%- include('../partials/_navbar') -%>
 
             <!-- Filter and Search -->
-            <form method="post">
 
-                <!-- Table -->
-                <% if (Object.keys(students).length===0) { %>
-                    <%- include('../partials/_noData') -%>
-                        <% } else { %>
+            <!-- Table -->
+            <% if (Object.keys(students).length===0) { %>
+                <%- include('../partials/_noData') -%>
+                    <% } else { %>
+                        <form method="post">
                             <div class="flex min-w-full overflow-x-auto justify-center">
-                                <table class="table-compact table max-w-8xl">
+                                <table class="table-compact table max-w-8xl ">
                                     <thead>
                                         <tr>
                                             <th>Numara</th>
@@ -47,22 +47,22 @@
                                                     </td>
                                                 </tr>
                                                 <input type="hidden" name=" <%= studentId %>"
-                                                    value="<%= Object.keys(student.lessons).length===5 ? "Tüm gün" :
+                                                    value="<%= Object.keys(student.lessons).length===5 ? " Tüm gün" :
                                                     `${Object.keys(student.lessons).length} ders` %>">
                                                 <% }); %>
                                     </tbody>
                                 </table>
                             </div>
+
+                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+
+                            <button type="submit" class="rounded-lg btn btn-primary btn-block mt-4">Devam
+                                et</button>
                             <% } %>
+                        </form>
 
-                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-
-                                <button type="submit" class="rounded-lg btn btn-primary btn-block mt-4">Devam
-                                    et</button>
-            </form>
-
-            <%- include('../partials/_footer') -%>
-                <%- include('../partials/_scripts') -%>
+                        <%- include('../partials/_footer') -%>
+                            <%- include('../partials/_scripts') -%>
     </body>
 
     </html>
