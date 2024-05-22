@@ -15,7 +15,7 @@ module.exports.index = asyncHandler(async (req, res, next) => {
 });
 module.exports.attendanceGroups = asyncHandler(async (req, res, next) => {
     const groups = await Group.findAll({})
-    res.render("site/groups", {
+    res.render("teacher/groups", {
         title: "Yoklama al",
         groups: groups,
     })

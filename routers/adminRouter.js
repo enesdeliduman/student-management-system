@@ -26,5 +26,10 @@ router.get("/teacher/:id/leave/delete", isAdmin, adminController.teacherLeaveDel
 router.get("/parent-settings/:id", isAdmin, adminController.parentSettingsGet)
 router.post("/parent-settings/:id", adminController.parentSettingsPost);
 
+router.get("/groups", isAdmin, adminController.groups);
+router.get("/group/:id", isAdmin, adminController.group);
+
+router.get("/add", isAdmin, adminController.add);
+router.get("/add/student", isAdmin, adminController.addStudent);
 
 module.exports = router;

@@ -1,0 +1,44 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <div class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center">
+                <section class="bg-gray-2 rounded-xl">
+                    <form method="post"
+                        class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20">
+                        <div class="form-group">
+                            <div class="form-field">
+                                <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+                                <label class="form-label">İsim</label>
+                                <input placeholder="Type here" type="text" name="fullName" class="input max-w-full" />
+                            </div>
+                            <div class="form-field grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div>
+                                    <label class="sr-only" for="group">Grup</label>
+                                    <select class="input max-w-full" id="group" name="groupId">
+                                        <% groups.forEach(group=> { %>
+                                            <option value="<%= group.id %>">
+                                                <%= group.name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="sr-only" for="phone"></label>
+                                    <input class="input max-w-full" placeholder="Telefon no" type="tel" id="phone"
+                                        name="telephoneNumber" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="send" class="rounded-lg btn btn-primary btn-block">Güncelle</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>

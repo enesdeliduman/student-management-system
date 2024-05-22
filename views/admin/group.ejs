@@ -1,0 +1,83 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <div class="text-end space-y-4">
+                <button class="btn btn-primary" type="button" id="print">Yazdır</button>
+                <% if (typeof alert !="undefined" ) { %>
+                    <%- include('../partials/_alert',alert) -%>
+                        <% } %>
+                            <div class=" grid gap-4 grid-cols-1 md:grid-cols-2 space-x-4 justify-center items-center">
+                                <div class="border rounded-lg p-4 overflow-x-auto">
+                                    <div class="flex flex-wrap space-x-8 text-nowrap items-center">
+                                        <img class="max-w-[150px] rounded-lg" src="/uploads/<%= group.photo %>" alt="">
+                                        <div>
+                                            <div class="flex space-x-2">
+                                                <p>İsim:</p>
+                                                <p class="text-md"><b>
+                                                        <%= group.name %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Danışman:</p>
+                                                <p class="text-md"><b>
+                                                        <%= group.teacher.fullName %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Eğitim gördüğü sınıf:</p>
+                                                <p class="text-md"><b>
+                                                        <%= group.class.name %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Öğrenci mevcudu:</p>
+                                                <p class="text-md"><b>
+                                                        <%= group.students.length %>
+                                                    </b></p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <p>Grup bölümü:</p>
+                                                <p class="text-md"><b>
+                                                        <%= group.field.name %>
+                                                    </b></p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
+                                <table class="overflow-scroll table-compact table max-w-8xl">
+                                    <thead>
+                                        <tr>
+                                            <th>Numara</th>
+                                            <th>Ad soyad</th>
+                                            <th>Seçenekler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% let count=0 %>
+                                            <% group.students.forEach(student=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= student.id %>
+                                                    </td>
+                                                    <td class="name">
+                                                        <%= student.fullName %>
+                                                    </td>
+                                                    <td class="max-w-min">
+                                                        <a class="link link-primary link-ghost-primary"
+                                                            href="/student/<%= student.id %>">Profili görüntüle</a>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+            </div>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>

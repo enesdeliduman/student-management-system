@@ -1,0 +1,23 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <div class="grid gap-x-8 gap-y-8 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 ">
+                <% groups.forEach(group=> { %>
+                    <div class="card bg-backgroundPrimary">
+                        <a href="/group/<%= group.id %>">
+                            <div class="card-body flex justify-between">
+                                <p>
+                                    <%= group.name %>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <% }) %>
+            </div>
+            <%- include('../partials/_footer') -%>
+                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>
+

@@ -13,7 +13,7 @@ dotenv.config({
 const routers = require("./routers/index");
 const { connectDB, sequelize } = require('./data/databaseConnect.js');
 const { ErrorHandler } = require("./middlewares/ErrorHandler.js")
-const locals= require("./middlewares/locals.js")
+const locals = require("./middlewares/locals.js")
 const relationships = require("./data/modelsRelationships.js");
 const createTables = require("./data/dummyData.js").createTables;
 const createDummyData = require("./data/dummyData.js").createDummyData;
@@ -43,12 +43,17 @@ app.use('/public', express.static('public'))
 
 // Routers
 app.use(routers);
+app.use((req, res, next) => {
+    let err = new Error("")
+    err.status = 404
+    next(err)
+});
 
 // Error Handler Middleware
 app.use(ErrorHandler);
 
 // Veritabanı bağlantısı
-(async () => {  
+(async () => {
     await connectDB();
     // await relationships();
     // await createDummyData();

@@ -9,10 +9,12 @@ const Truancy = require("../models/Truancy");
 const Parent = require("../models/Parent");
 const PracticeExamTYT = require("../models/PracticeExamTYT");
 const PracticeExamAYT = require("../models/PracticeExamAYT");
+const Field = require("../models/Field");
 const Branch = require("../models/Branch");
 const isAdmin = require("../middlewares/isAdmin");
 const Attendance = require("../models/Attendance");
 const { all } = require("../routers");
+const Level = require("../models/Level");
 const client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 module.exports.index = asyncHandler(async (req, res, next) => {
@@ -442,4 +444,61 @@ module.exports.teacherSettingsPost = asyncHandler(async (req, res, next) => {
   };
   req.session.alert = alert;
   res.redirect(`/teacher/${id}`);
+});
+
+module.exports.groups = asyncHandler(async (req, res, next) => {
+  const groups = await Group.findAll()
+  res.render("admin/groups", {
+    title: "Gruplar",
+    groups: groups
+  })
+});
+
+module.exports.group = asyncHandler(async (req, res, next) => {
+  const group = await Group.findByPk(req.params.id, {
+    include: [
+      {
+        model: Student,
+        attributes: ["fullName", "id"]
+      },
+      {
+        model: Teacher,
+        attributes: ["fullName", "id"]
+      },
+      {
+        model: Class,
+        attributes: ["name"]
+      },
+      {
+        model: Level,
+        attributes: ["name"]
+      },
+      {
+        model: Field,
+        attributes: ["name"]
+      },
+    ]
+  })
+  res.render("admin/group", {
+    title: `Grup ${group.name}`,
+    group: group
+  })
+});
+
+module.exports.add = asyncHandler(async (req, res, next) => {
+  res.render("site/add", {
+    title: "Kayıt ekle"
+  })
+});
+module.exports.addStudent = asyncHandler(async (req, res, next) => {
+  const groups = await Group.findAll()
+  const levels = await Level.findAll()
+  const fields = await Field.findAll()
+  res.render("site/add-student", {
+    title: "Yeni öğrenci kaydı",
+    groups: groups,
+    fields: fields,
+    levels: levels,
+    csrfToken: req.csrfToken(),
+  })
 });
