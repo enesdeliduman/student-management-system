@@ -2,43 +2,100 @@
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
-            <div class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center">
+            <div
+                class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center items-center">
                 <section class="bg-gray-2 rounded-xl">
+                    <p class="text-xl font-bold m-4">Öğrenci</p>
                     <form method="post"
                         class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20">
                         <div class="form-group">
                             <div class="form-field">
                                 <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
-                                <label class="form-label">İsim</label>
-                                <input placeholder="Type here" type="text" name="fullName" class="input max-w-full" />
                             </div>
-                            <div class="form-field grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                <div>
-                                    <label class="sr-only" for="group">Grup</label>
-                                    <select class="input max-w-full" id="group" name="groupId">
-                                        <% groups.forEach(group=> { %>
-                                            <option value="<%= group.id %>">
-                                                <%= group.name %>
-                                            </option>
-                                            <% }) %>
-                                    </select>
-                                </div>
+                            <input placeholder="Öğrenci ismi" type="text" name="studentFullName" id="studentFullName"
+                                class="input max-w-full" />
+                            <div>
+                                <select class="input max-w-full" id="studentGroup" name="groupId">
+                                    <option value="-1">Grup Seçiniz</option>
+                                    <% groups.forEach(group=> { %>
+                                        <option value="<%= group.id %>">
+                                            <%= group.name %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
 
-                                <div>
-                                    <label class="sr-only" for="phone"></label>
-                                    <input class="input max-w-full" placeholder="Telefon no" type="tel" id="phone"
-                                        name="telephoneNumber" />
-                                </div>
+                            <div>
+                                <label class="sr-only" for="phone"></label>
+                                <input class="input max-w-full" placeholder="Telefon no" type="tel" id="phone"
+                                    name="studentTelephoneNumber" />
+                            </div>
+                            <div>
+                                <input type="date" class="input max-w-full" placeholder="Doğum tarihi"
+                                    name="studentBirthDate" id="">
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <button type="send" class="rounded-lg btn btn-primary btn-block">Güncelle</button>
+
+                </section>
+                <section class="bg-gray-2 rounded-xl">
+                    <p class="text-xl font-bold m-4">Veli</p>
+                    <div
+                        class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20">
+                        <div class="form-group">
+                            <select class="input max-w-full" id="parent" name="parentId">
+                                <option value="-1">Veli Seçiniz</option>
+                                <% parents.forEach(parent=> { %>
+                                    <option value="<%= parent.id %>">
+                                        <%= parent.fullName %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <div class="space-y-4">
+                                <label class="sr-only" for="parent"></label>
+                                <input class="input max-w-full" placeholder="Veli İsim" type="text" id="parentFullName"
+                                    name="parentFullName" />
+                                <label class="sr-only" for="phone"></label>
+                                <input class="input max-w-full" placeholder="Veli Telefon no" type="tel"
+                                    id="parentTelephoneNumber" name="parentTelephoneNumber" />
+                            </div>
                         </div>
-                    </form>
+
+                    </div>
                 </section>
             </div>
+            <div class="mt-4">
+                <button type="send" class="rounded-lg btn btn-primary btn-block">Kayıt ekle</button>
+            </div>
+            </form>
             <%- include('../partials/_footer') -%>
                 <%- include('../partials/_scripts') -%>
+                    <script>
+                        const parentFullName = document.querySelector("#parentFullName");
+                        const parentTelephoneNumber = document.querySelector("#parentTelephoneNumber");
+                        const parent = document.querySelector("#parent");
+
+                        parent.addEventListener("change", () => {
+                            if (parent.value != -1) {
+                                parentTelephoneNumber.disabled = true;
+                                parentFullName.disabled = true;
+                            } else {
+                                parentTelephoneNumber.disabled = false;
+                                parentFullName.disabled = false;
+                            }
+                        });
+
+                        parentFullName.addEventListener("keypress", checkInputLength);
+                        parentTelephoneNumber.addEventListener("keypress", checkInputLength);
+
+                        function checkInputLength() {
+                            if (parentFullName.value.trim().length < 2 || parentTelephoneNumber.value.trim().length < 2) {
+                                parent.disabled = false;
+                            } else {
+                                parent.disabled = true;
+                            }
+                        }
+                    </script>
+
     </body>
 
     </html>

@@ -4,8 +4,6 @@
         <%- include('../partials/_navbar') -%>
             <!-- Filter and Search -->
             <div class="auto w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
-                <input type="text" id="search" class="auto input input-lg max-w-full pl-10"
-                    placeholder="İsim giriniz" />
                 <form action="get">
                     <select class="auto select" id="selected">
                         <option value="default" <%=(filter==="default" )? "selected" :"" %>>Tümü</option>

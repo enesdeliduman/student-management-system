@@ -13,8 +13,8 @@ const Field = require("../models/Field");
 const Branch = require("../models/Branch");
 const isAdmin = require("../middlewares/isAdmin");
 const Attendance = require("../models/Attendance");
-const { all } = require("../routers");
 const Level = require("../models/Level");
+const { Op } = require("sequelize");
 const client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 module.exports.index = asyncHandler(async (req, res, next) => {
@@ -37,7 +37,18 @@ module.exports.index = asyncHandler(async (req, res, next) => {
 module.exports.students = asyncHandler(async (req, res, next) => {
   const size = parseInt(process.env.PAGINATION_SIZE);
   const { page = 0, filter } = req.query;
+  const name = req.query.search
+  let whereClause = {};
+
+  if (name && name.length > 2) {
+    whereClause = {
+      fullName: {
+        [Op.like]: `%${name}%`
+      }
+    };
+  }
   const { rows, count } = await Student.findAndCountAll({
+    where: whereClause,
     include: [
       {
         model: Group,
@@ -363,7 +374,18 @@ module.exports.parentSettingsPost = asyncHandler(async (req, res, next) => {
 module.exports.teachers = asyncHandler(async (req, res, next) => {
   const size = parseInt(process.env.PAGINATION_SIZE);
   const { page = 0, filter } = req.query;
+  const name = req.query.search
+  let whereClause = {};
+
+  if (name && name.length > 2) {
+    whereClause = {
+      fullName: {
+        [Op.like]: `%${name}%`
+      }
+    };
+  }
   const { rows, count } = await Teacher.findAndCountAll({
+    where: whereClause,
     limit: size,
     offset: page * size,
     include: [{
@@ -490,15 +512,46 @@ module.exports.add = asyncHandler(async (req, res, next) => {
     title: "Kayıt ekle"
   })
 });
-module.exports.addStudent = asyncHandler(async (req, res, next) => {
+module.exports.addStudentGet = asyncHandler(async (req, res, next) => {
   const groups = await Group.findAll()
-  const levels = await Level.findAll()
-  const fields = await Field.findAll()
+  const parents = await Parent.findAll()
+
+
+
   res.render("site/add-student", {
     title: "Yeni öğrenci kaydı",
     groups: groups,
-    fields: fields,
-    levels: levels,
+    parents:parents,
     csrfToken: req.csrfToken(),
+  })
+});
+
+module.exports.addStudentPost = asyncHandler(async (req, res, next) => {
+  let parent;
+  const {
+    studentFullName,
+    studentGroup,
+    studentTelephoneNumber,
+    studenBirthDate,
+    parentId,
+    parentFullName,
+    parentTelephoneNumber
+  } = req.body
+
+  parent = parentId
+  if (parentId == -1) {
+    let newParent = await Parent.create({
+      fullName: parentFullName,
+      telephoneNumber: parentTelephoneNumber
+    })
+    parent = newParent.id
+  }
+  console.log(parent)
+  console.log(req.body)
+  await Student.create({
+    fullName: studentFullName,
+    telephoneNumber: studentTelephoneNumber,
+    studentBirthDate: studenBirthDate,
+    groupId: studentGroup,
   })
 });
