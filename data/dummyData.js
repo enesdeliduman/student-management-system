@@ -49,7 +49,8 @@ module.exports.createDummyData = async () => {
     const roles = await Role.bulkCreate([
       { name: 'Admin' },
       { name: 'Teacher' },
-      { name: 'Student' }
+      { name: 'Student' },
+      { name: 'Parent' },
     ])
 
     const branches = await Branch.bulkCreate([
@@ -135,11 +136,7 @@ module.exports.createDummyData = async () => {
     ])
 
     const students = await Student.bulkCreate([
-      {
-        fullName: 'Enes Deliduman',
-        photo: 'student1.jpg',
-        userId: users[2].id
-      },
+      { fullName: 'Enes Deliduman', photo: 'student1.jpg', userId: users[2].id },
       { fullName: 'Bedriye Şimşek', photo: 'photo1.jpg' },
       { fullName: 'Yunuscan Acar', photo: 'photo1.jpg' },
       { fullName: 'Sinem Baş', photo: 'photo1.jpg' },

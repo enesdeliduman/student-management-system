@@ -2480,10 +2480,6 @@ body {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
 .mb-12 {
   margin-bottom: 3rem;
 }
@@ -2539,9 +2535,6 @@ body {
   width: -moz-max-content;
   width: max-content;
 }
-.w-1\/2 {
-  width: 50%;
-}
 .min-w-full {
   min-width: 100%;
 }
@@ -2569,9 +2562,6 @@ body {
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
@@ -2640,11 +2630,6 @@ body {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-.space-y-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 .overflow-scroll {
   overflow: scroll;
@@ -2724,20 +2709,14 @@ body {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.pl-10 {
-  padding-left: 2.5rem;
+.pl-4 {
+  padding-left: 1rem;
 }
 .pt-10 {
   padding-top: 2.5rem;
 }
 .pt-5 {
   padding-top: 1.25rem;
-}
-.pl-5 {
-  padding-left: 1.25rem;
-}
-.pl-4 {
-  padding-left: 1rem;
 }
 .text-center {
   text-align: center;

@@ -5,7 +5,8 @@ const { sequelize } = require("../data/databaseConnect");
 const Parent = sequelize.define("parent", {
     fullName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: false
     },
     telephoneNumber: {
         type: DataTypes.STRING,

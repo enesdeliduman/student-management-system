@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Role = require("../models/Role");
 const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
+const Parent = require("../models/Parent");
 
 module.exports.signInGet = asyncHandler(async (req, res, next) => {
   const alert = req.session.alert;
@@ -34,6 +35,10 @@ module.exports.signInPost = asyncHandler(async (req, res, next) => {
         model: Teacher,
         attributes: ["fullName"],
       },
+      {
+        model: Parent,
+        attributes: ["fullName"],
+      },
     ],
   });
   if (user) {
@@ -42,9 +47,16 @@ module.exports.signInPost = asyncHandler(async (req, res, next) => {
       req.session.role = user.role.name;
       req.session.isAuth = true;
       req.session.userId = user.id;
-      req.session.fullName = user.student
-        ? user.student.fullName
-        : user.teacher.fullName;
+
+      let fullName = "";
+      if (user.student) {
+        fullName = user.student.fullName;
+      } else if (user.teacher) {
+        fullName = user.teacher.fullName;
+      } else if (user.parent) {
+        fullName = user.parent.fullName;
+      }
+
       return res.redirect("/");
     }
     req.session.alert = {

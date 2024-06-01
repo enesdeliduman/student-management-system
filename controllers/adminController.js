@@ -11,10 +11,12 @@ const PracticeExamTYT = require("../models/PracticeExamTYT");
 const PracticeExamAYT = require("../models/PracticeExamAYT");
 const Field = require("../models/Field");
 const Branch = require("../models/Branch");
+const User = require("../models/User");
 const isAdmin = require("../middlewares/isAdmin");
 const Attendance = require("../models/Attendance");
 const Level = require("../models/Level");
 const { Op } = require("sequelize");
+const Role = require("../models/Role");
 const client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 module.exports.index = asyncHandler(async (req, res, next) => {
@@ -250,7 +252,7 @@ module.exports.attendancesConfirmPost = asyncHandler(async (req, res, next) => {
         studentId: key
       })
       list.push(`Sayın veli, öğrenciniz; ${student.fullName} ${desc} devamsızlık yapmıştır`)
-      client.messages
+      await client.messages
         .create({
           body: `Sayın veli, öğrenciniz; ${student.fullName} ${desc} devamsızlık yapmıştır`,
           from: process.env.TWILIO_NUMBER,
@@ -513,45 +515,123 @@ module.exports.add = asyncHandler(async (req, res, next) => {
   })
 });
 module.exports.addStudentGet = asyncHandler(async (req, res, next) => {
+  const alert = req.session.alert;
+  delete req.session.alert;
   const groups = await Group.findAll()
   const parents = await Parent.findAll()
-
 
 
   res.render("site/add-student", {
     title: "Yeni öğrenci kaydı",
     groups: groups,
-    parents:parents,
+    parents: parents,
+    alert: alert,
     csrfToken: req.csrfToken(),
   })
 });
 
 module.exports.addStudentPost = asyncHandler(async (req, res, next) => {
-  let parent;
   const {
     studentFullName,
-    studentGroup,
+    groupId,
     studentTelephoneNumber,
-    studenBirthDate,
+    studentBirthDate,
+    tc,
     parentId,
     parentFullName,
     parentTelephoneNumber
   } = req.body
+  if (studentFullName.length < 3 || groupId == -1 || studentTelephoneNumber.length < 8 || tc < 10) {
+    let alert = {
+      message: "Lütfen tüm bilgileri kontrol ederek tekrar deneyiniz",
+      type: "danger",
+    };
+    req.session.alert = alert;
+    return res.redirect("/add/student")
+  }
+  if (parentId == -1 && parentFullName.length + parentTelephoneNumber.length < 13) {
+    let alert = {
+      message: "Lütfen tüm bilgileri kontrol ederek tekrar deneyiniz",
+      type: "danger",
+    };
+    req.session.alert = alert;
+    return res.redirect("/add/student")
+  }
 
-  parent = parentId
-  if (parentId == -1) {
-    let newParent = await Parent.create({
-      fullName: parentFullName,
-      telephoneNumber: parentTelephoneNumber
+  let parent = parentId
+
+  function generatePassword() {
+    let password = '';
+    for (let i = 0; i < 8; i++) {
+      password += Math.floor(Math.random() * 10); // 0 ile 9 arasında rastgele bir sayı ekle
+    }
+    return password;
+  }
+
+  if (!parentId || parentId == -1) {
+    let newParentUsername = await generatePassword()
+    let newParentPassword = await generatePassword()
+    let parentRole = await Role.findOne({
+      where: {
+        name: "Parent"
+      }
     })
+    const parentUser = await User.create({
+      username: newParentUsername.toUpperCase(),
+      password: newParentPassword,
+      roleId: parentRole.id
+    })
+    let newParent = await Parent.create({
+      fullName: parentFullName.toUpperCase(),
+      telephoneNumber: parentTelephoneNumber,
+      userId: parentUser.id
+    })
+    await client.messages
+      .create({
+        body: `Sayın ${parentFullName.toUpperCase()}, dershane kaydı başarıyla gerçekleşmiştir.\nBilgi Yönetim Sistemi ile velisi olduğunuz öğrencilerin bilgilerini kontrol edebilirsiniz giriş bilgileriniz aşağıdaki gibidir\nKullanıcı adı: ${newParentUsername}\nŞifre: ${newParentPassword}`,
+        from: process.env.TWILIO_NUMBER,
+        to: `+90${parentTelephoneNumber}`
+      })
+      .then(message => console.log(message.sid))
+      .catch();
     parent = newParent.id
   }
-  console.log(parent)
-  console.log(req.body)
-  await Student.create({
-    fullName: studentFullName,
-    telephoneNumber: studentTelephoneNumber,
-    studentBirthDate: studenBirthDate,
-    groupId: studentGroup,
+  let studentRole = await Role.findOne({
+    where: {
+      name: "Student"
+    }
   })
+
+  const newStudentPassword = await generatePassword()
+
+  await client.messages
+    .create({
+      body: `Sayın ${studentFullName.toUpperCase()}, dershanemize kaydınız başarıyla gerçekleşmiştir.\nBilgi Yönetim Sistemi giriş bilgileriniz aşağıdaki gibidir\nKullanıcı adı: ${tc}\nŞifre: ${newStudentPassword}`,
+      from: process.env.TWILIO_NUMBER,
+      to: `+90${studentTelephoneNumber}`
+    })
+    .then(message => console.log(message.sid))
+    .catch();
+
+
+  let user = await User.create({
+    username: tc,
+    password: newStudentPassword,
+    roleId: studentRole.id
+  })
+  await Student.create({
+    fullName: studentFullName.toUpperCase(),
+    tcNo: tc,
+    telephoneNumber: studentTelephoneNumber,
+    dateOfBirth: studentBirthDate,
+    groupId: groupId,
+    parentId: parent,
+    userId: user.id
+  })
+  let alert = {
+    message: "Öğrenci kaydı başarıyla gerçekleşti",
+    type: "success",
+  };
+  req.session.alert = alert;
+  return res.redirect("/add/student")
 });

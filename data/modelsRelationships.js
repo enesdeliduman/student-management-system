@@ -76,6 +76,10 @@ const relationships = async function () {
   User.hasOne(Student);
   Student.belongsTo(User);
 
+  // Kullanıcı ve öğrenci
+  User.hasOne(Parent);
+  Parent.belongsTo(User);
+
   // Kullanıcı ve öğretmen
   User.hasOne(Teacher);
   Teacher.belongsTo(User);

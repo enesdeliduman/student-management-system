@@ -2,7 +2,11 @@
 
     <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
         <%- include('../partials/_navbar') -%>
-            <div
+            
+        <% if (typeof alert !="undefined" ) { %>
+            <%- include('../partials/_alert',alert) -%>
+                <% } %>
+                <div
                 class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center items-center">
                 <section class="bg-gray-2 rounded-xl">
                     <p class="text-xl font-bold m-4">Öğrenci</p>
@@ -10,9 +14,14 @@
                         class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20">
                         <div class="form-group">
                             <div class="form-field">
-                                <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+                                <input required type="text" hidden value="<%= csrfToken %>" name="_csrf">
                             </div>
-                            <input placeholder="Öğrenci ismi" type="text" name="studentFullName" id="studentFullName"
+                            <div>
+                                <label class="sr-only" for="tc"></label>
+                                <input required class="input max-w-full" maxlength="11" minlength="11" placeholder="TC Kimlik No" type="tel" id="tc"
+                                    name="tc" />
+                            </div>
+                            <input required placeholder="Öğrenci ismi" type="text" name="studentFullName" id="studentFullName"
                                 class="input max-w-full" />
                             <div>
                                 <select class="input max-w-full" id="studentGroup" name="groupId">
@@ -25,13 +34,14 @@
                                 </select>
                             </div>
 
+
                             <div>
-                                <label class="sr-only" for="phone"></label>
-                                <input class="input max-w-full" placeholder="Telefon no" type="tel" id="phone"
-                                    name="studentTelephoneNumber" />
+                                <input required class="input max-w-full" placeholder="Telefon no" type="tel" id="phone"
+                                name="studentTelephoneNumber" minlength="10" maxlength="10" oninput="formatPhoneNumber(this)">
+                                <label class="form-label" for="phone">10 Hane şeklinde giriniz <br>Örn: 551 555 55 55</label>
                             </div>
                             <div>
-                                <input type="date" class="input max-w-full" placeholder="Doğum tarihi"
+                                <input required type="date" class="input max-w-full" placeholder="Doğum tarihi"
                                     name="studentBirthDate" id="">
                             </div>
                         </div>
@@ -54,9 +64,10 @@
                                 <label class="sr-only" for="parent"></label>
                                 <input class="input max-w-full" placeholder="Veli İsim" type="text" id="parentFullName"
                                     name="parentFullName" />
-                                <label class="sr-only" for="phone"></label>
-                                <input class="input max-w-full" placeholder="Veli Telefon no" type="tel"
-                                    id="parentTelephoneNumber" name="parentTelephoneNumber" />
+                                <input class="input max-w-full" minlength="10" maxlength="10"  placeholder="Veli Telefon no" type="tel"
+                                    id="parentTelephoneNumber" name="parentTelephoneNumber" oninput="formatPhoneNumber(this)">
+                                    <label class="form-label" for="parentTelephoneNumber">10 Hane şeklinde giriniz <br>Örn: 551 555 55 55</label>
+
                             </div>
                         </div>
 
@@ -94,8 +105,25 @@
                                 parent.disabled = true;
                             }
                         }
+                        function formatPhoneNumber(input) {
+                            // Boşlukları ve tireleri temizle
+                            let phoneNumber = input.value.replace(/\s|-/g, '');
+                          
+                            // İlk 10 rakamı al (fazla rakamları at)
+                            phoneNumber = phoneNumber.slice(0, 10);
+                          
+                            // Telefon numarasını 3 3 4 formatına dönüştür
+                            let formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3');
+                          
+                            // Girilen değeri güncelle
+                            input.value = formattedPhoneNumber;
+                          }
+                          
                     </script>
 
     </body>
 
     </html>
+
+
+    

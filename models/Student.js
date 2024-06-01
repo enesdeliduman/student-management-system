@@ -6,6 +6,12 @@ const Student = sequelize.define("student", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  tcNo: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "yok"
+
+  },
   photo: {
     type: DataTypes.STRING,
     allowNull: false,
