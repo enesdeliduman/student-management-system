@@ -32,5 +32,11 @@ router.get("/group/:id", isAdmin, adminController.group);
 router.get("/add", isAdmin, adminController.add);
 router.get("/add/student", isAdmin, adminController.addStudentGet);
 router.post("/add/student", isAdmin, adminController.addStudentPost);
+router.get("/add/teacher", isAdmin, adminController.addTeacherGet);
+router.post("/add/teacher", isAdmin, adminController.addTeacherPost);
+router.get("/add/parent", isAdmin, adminController.addParentGet);
+router.post("/add/parent", isAdmin, adminController.addParentPost);
+router.get("/add/group", isAdmin, adminController.addGroupGet);
+router.post("/add/group", isAdmin, adminController.addGroupPost);
 
 module.exports = router;

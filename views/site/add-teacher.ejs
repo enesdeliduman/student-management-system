@@ -1,0 +1,73 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+
+            <% if (typeof alert !="undefined" ) { %>
+                <%- include('../partials/_alert',alert) -%>
+                    <% } %>
+                        <div
+                            class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center items-center">
+                            <section class="bg-gray-2 rounded-xl">
+                                <p class="text-xl font-bold m-4">Öğretmen</p>
+                                <form method="post"
+                                    class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20 ">
+                                    <% if (typeof errors !='undefined' ) { %>
+                                        <ul>
+                                            <% errors.forEach(error=> { %>
+                                                <li class="list-disc text-error">
+                                                    <%= error.message %>
+                                                </li>
+                                                <% }) %>
+                                        </ul>
+                                        <% } %>
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+                                                </div>
+                                                <div>
+                                                    <label class="sr-only" for="tc"></label>
+                                                    <input class="input max-w-full" maxlength="11" minlength="11"
+                                                        placeholder="TC Kimlik No" type="tel" id="tc" name="tc" />
+                                                </div>
+                                                <input placeholder="Öğretmen ismi" type="text" name="teacherFullName"
+                                                    id="teacherFullName" class="input max-w-full" />
+                                                <div>
+                                                    <select class="input max-w-full" id="teacherBranch" name="branchId">
+                                                        <option value="-1">Branş</option>
+                                                        <% branches.forEach(branch=> { %>
+                                                            <option value="<%= branch.id %>">
+                                                                <%= branch.name %>
+                                                            </option>
+                                                            <% }) %>
+                                                    </select>
+                                                </div>
+
+
+                                                <div>
+                                                    <input class="input max-w-full" placeholder="Telefon no" type="tel"
+                                                        id="phone" name="teacherTelephoneNumber" minlength="10"
+                                                        maxlength="10" oninput="formatPhoneNumber(this)">
+                                                    <label class="form-label" for="phone">10 Hane şeklinde
+                                                        giriniz
+                                                        <br>Örn: 551
+                                                        555 55 55</label>
+                                                </div>
+                                                <div>
+                                                    <input type="date" class="input max-w-full"
+                                                        placeholder="Doğum tarihi" name="teacherBirthDate" id="">
+                                                </div>
+                                            </div>
+
+                            </section>
+                        </div>
+                        <div class="mt-4">
+                            <button type="send" class="rounded-lg btn btn-primary btn-block">Kayıt ekle</button>
+                        </div>
+                        </form>
+                        <%- include('../partials/_footer') -%>
+                            <%- include('../partials/_scripts') -%>
+
+    </body>
+
+    </html>

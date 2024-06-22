@@ -4,7 +4,7 @@ const {sequelize} = require("../data/databaseConnect");
 const Lesson = sequelize.define("lesson", {
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     }
 });
 

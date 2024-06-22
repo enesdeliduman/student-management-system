@@ -516,7 +516,9 @@ module.exports.add = asyncHandler(async (req, res, next) => {
 });
 module.exports.addStudentGet = asyncHandler(async (req, res, next) => {
   const alert = req.session.alert;
+  const errors = req.session.errors;
   delete req.session.alert;
+  delete req.session.errors;
   const groups = await Group.findAll()
   const parents = await Parent.findAll()
 
@@ -526,6 +528,7 @@ module.exports.addStudentGet = asyncHandler(async (req, res, next) => {
     groups: groups,
     parents: parents,
     alert: alert,
+    errors: errors,
     csrfToken: req.csrfToken(),
   })
 });
@@ -541,24 +544,15 @@ module.exports.addStudentPost = asyncHandler(async (req, res, next) => {
     parentFullName,
     parentTelephoneNumber
   } = req.body
-  if (studentFullName.length < 3 || groupId == -1 || studentTelephoneNumber.length < 8 || tc < 10) {
-    let alert = {
-      message: "Lütfen tüm bilgileri kontrol ederek tekrar deneyiniz",
-      type: "danger",
-    };
-    req.session.alert = alert;
-    return res.redirect("/add/student")
-  }
-  if (parentId == -1 && parentFullName.length + parentTelephoneNumber.length < 13) {
-    let alert = {
-      message: "Lütfen tüm bilgileri kontrol ederek tekrar deneyiniz",
-      type: "danger",
-    };
-    req.session.alert = alert;
-    return res.redirect("/add/student")
-  }
-
   let parent = parentId
+
+  let student = await Student.create({
+    fullName: studentFullName.toUpperCase(),
+    tcNo: tc,
+    telephoneNumber: studentTelephoneNumber,
+    dateOfBirth: studentBirthDate,
+    groupId: groupId,
+  })
 
   function generatePassword() {
     let password = '';
@@ -619,19 +613,138 @@ module.exports.addStudentPost = asyncHandler(async (req, res, next) => {
     password: newStudentPassword,
     roleId: studentRole.id
   })
-  await Student.create({
-    fullName: studentFullName.toUpperCase(),
-    tcNo: tc,
-    telephoneNumber: studentTelephoneNumber,
-    dateOfBirth: studentBirthDate,
-    groupId: groupId,
-    parentId: parent,
-    userId: user.id
-  })
+
   let alert = {
     message: "Öğrenci kaydı başarıyla gerçekleşti",
     type: "success",
   };
   req.session.alert = alert;
   return res.redirect("/add/student")
+});
+
+module.exports.addTeacherGet = asyncHandler(async (req, res, next) => {
+  const alert = req.session.alert;
+  const errors = req.session.errors;
+  delete req.session.alert;
+  delete req.session.errors;
+
+  let branches = await Branch.findAll()
+
+  res.render("site/add-teacher", {
+    title: "Yeni öğretmen kaydı",
+    branches: branches,
+    alert: alert,
+    errors: errors,
+    csrfToken: req.csrfToken(),
+  })
+});
+
+module.exports.addTeacherPost = asyncHandler(async (req, res, next) => {
+  const {
+    teacherFullName,
+    branchId,
+    teacherTelephoneNumber,
+    teacherBirthDate,
+    tc,
+  } = req.body
+  const teacher = await Teacher.create({
+    fullName: teacherFullName,
+    telephoneNumber: teacherTelephoneNumber,
+    dateOfBirth: teacherBirthDate,
+    tcNo: tc,
+    branchId: branchId
+  })
+
+  let alert = {
+    message: "Öğretmen kaydı başarıyla gerçekleşti",
+    type: "success",
+  };
+
+  req.session.alert = alert;
+  return res.redirect("/add/teacher")
+});
+
+module.exports.addParentGet = asyncHandler(async (req, res, next) => {
+  const alert = req.session.alert;
+  const errors = req.session.errors;
+  delete req.session.alert;
+  delete req.session.errors;
+
+
+  res.render("site/add-parent", {
+    title: "Yeni veli kaydı",
+    alert: alert,
+    errors: errors,
+    csrfToken: req.csrfToken(),
+  })
+});
+
+module.exports.addParentPost = asyncHandler(async (req, res, next) => {
+  const {
+    parentFullName,
+    parentTelephoneNumber,
+  } = req.body
+
+  const parent = await Parent.create({
+    fullName: parentFullName,
+    telephoneNumber: parentTelephoneNumber,
+  })
+
+  let alert = {
+    message: "Veli kaydı başarıyla gerçekleşti",
+    type: "success",
+  };
+
+  req.session.alert = alert;
+  return res.redirect("/add/parent")
+});
+module.exports.addGroupGet = asyncHandler(async (req, res, next) => {
+  const alert = req.session.alert;
+  const errors = req.session.errors;
+  delete req.session.alert;
+  delete req.session.errors;
+
+  let fields = await Field.findAll()
+  let classes = await Class.findAll()
+  let levels = await Level.findAll()
+  let teachers = await Teacher.findAll()
+
+  res.render("site/add-group", {
+    title: "Grup oluştur",
+    alert: alert,
+    errors: errors,
+    fields: fields,
+    classes: classes,
+    levels: levels,
+    teachers: teachers,
+    csrfToken: req.csrfToken(),
+  })
+});
+
+module.exports.addGroupPost = asyncHandler(async (req, res, next) => {
+  const {
+    groupName,
+    fieldId,
+    groupId,
+    classId,
+    teacherId,
+    levelId,
+  } = req.body
+
+  const group = await Group.create({
+    name: groupName,
+    fieldId: fieldId,
+    groupId: groupId,
+    levelId: levelId,
+    teacherId: teacherId,
+    classId: classId,
+  })
+
+  let alert = {
+    message: "Grup kaydı başarıyla gerçekleşti",
+    type: "success",
+  };
+
+  req.session.alert = alert;
+  return res.redirect("/add/group")
 });

@@ -16,7 +16,7 @@ const PracticeExamAYT = sequelize.define('practice_exam_AYT', {
     },
     studentId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: Student,
             key: "id"
@@ -24,33 +24,33 @@ const PracticeExamAYT = sequelize.define('practice_exam_AYT', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     totalTrue: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     totalFalse: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     totalBlank: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     totalNet: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     TurkishLanguageAndLiteratureSocialSciences1: {
         type: DataTypes.JSON,
         TurkishLanguageAndLiterature: {
             type: DataTypes.JSON,
-            allowNull: false,
+            allowNull: true,
             trueQ: {
                 type: DataTypes.INTEGER,
                 defaultValue: 0
@@ -70,10 +70,10 @@ const PracticeExamAYT = sequelize.define('practice_exam_AYT', {
         },
         socialScience1: {
             type: DataTypes.JSON,
-            allowNull: false,
+            allowNull: true,
             history1: {
                 type: DataTypes.JSON,
-                allowNull: false,
+                allowNull: true,
                 trueQ: {
                     type: DataTypes.INTEGER,
                     defaultValue: 0
@@ -113,7 +113,7 @@ const PracticeExamAYT = sequelize.define('practice_exam_AYT', {
     },
     socialScience2: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
         history2: {
             trueQ: {
                 type: DataTypes.INTEGER,
@@ -189,7 +189,7 @@ const PracticeExamAYT = sequelize.define('practice_exam_AYT', {
     },
     mathematics: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
         trueQ: {
             type: DataTypes.INTEGER,
             defaultValue: 0

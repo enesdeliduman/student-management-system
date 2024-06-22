@@ -83,16 +83,16 @@ module.exports.createDummyData = async () => {
     ])
 
     const teachers = await Teacher.bulkCreate([
-      { fullName: 'Teacher 1', userId: users[0].id },
-      { fullName: 'Teacher 2', userId: users[1].id },
-      { fullName: 'Teacher 3' },
-      { fullName: 'Teacher 4' },
-      { fullName: 'Teacher 5' },
-      { fullName: 'Teacher 6' },
-      { fullName: 'Teacher 7' },
-      { fullName: 'Teacher 8' },
-      { fullName: 'Teacher 9' },
-      { fullName: 'Teacher 10' }
+      { fullName: 'Teacher 1', telephoneNumber: '5419440253',dateOfBirth:'2003.02.02', userId: users[0].id },
+      { fullName: 'Teacher 2', telephoneNumber: '5419440253',dateOfBirth:'2003.02.02', userId: users[1].id },
+      { fullName: 'Teacher 3', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 4', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 5', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 6', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 7', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 8', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 9', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 10', telephoneNumber: '5419440253',dateOfBirth:'2003.02.02' }
     ])
 
     const classes = await Class.bulkCreate([

@@ -16,7 +16,7 @@ const PracticeExamTYT = sequelize.define('practice_exam_TYT', {
     },
     studentId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: Student,
             key: "id"
@@ -24,27 +24,27 @@ const PracticeExamTYT = sequelize.define('practice_exam_TYT', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: "Kurum içi deneme"
     },
     totalTrue: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     totalFalse: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     totalBlank: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     totalNet: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0
     },
     turkish: {

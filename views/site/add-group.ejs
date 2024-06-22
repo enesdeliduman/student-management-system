@@ -1,0 +1,85 @@
+<%- include('../partials/_head') -%>
+
+<body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+    <%- include('../partials/_navbar') -%>
+
+    <% if (typeof alert != "undefined") { %>
+        <%- include('../partials/_alert', alert) -%>
+    <% } %>
+
+    <div class="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:flex sm:justify-center items-center">
+        <section class="bg-gray-2 rounded-xl">
+            <p class="text-xl font-bold m-4">Grup</p>
+            <form method="post"
+                class="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20">
+                <% if (typeof errors != 'undefined') { %>
+                    <ul>
+                        <% errors.forEach(error => { %>
+                            <li class="list-disc text-error">
+                                <%= error.message %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+
+                <div class="form-group">
+                    <div class="form-field">
+                        <input type="text" hidden value="<%= csrfToken %>" name="_csrf">
+                    </div>
+                    <div class="form-field">
+                        <input placeholder="Grup ismi" type="text" name="groupName"
+                            class="input max-w-full" />
+                    </div>
+                    <div>
+                        <select class="input max-w-full" id="teacher" name="teacherId">
+                            <option value="-1">Öğretmen</option>
+                            <% teachers.forEach(teacher => { %>
+                                <option value="<%= teacher.id %>">
+                                    <%= teacher.fullName %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="input max-w-full" id="level" name="levelId">
+                            <option value="-1">Düzey</option>
+                            <% levels.forEach(level => { %>
+                                <option value="<%= level.id %>">
+                                    <%= level.name %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="input max-w-full" id="field" name="fieldId">
+                            <option value="-1">Bölüm</option>
+                            <% fields.forEach(field => { %>
+                                <option value="<%= field.id %>">
+                                    <%= field.name %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="input max-w-full" id="class" name="classId">
+                            <option value="-1">Sınıf</option>
+                            <% classes.forEach(_class => { %>
+                                <option value="<%= _class.id %>">
+                                    <%= _class.name %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="rounded-lg btn btn-primary btn-block">Kayıt ekle</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <%- include('../partials/_footer') -%>
+    <%- include('../partials/_scripts') -%>
+</body>
+</html>

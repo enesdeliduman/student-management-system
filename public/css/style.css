@@ -2480,6 +2480,10 @@ body {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.my-24 {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
 .mb-12 {
   margin-bottom: 3rem;
 }
@@ -2559,6 +2563,9 @@ body {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.list-disc {
+  list-style-type: disc;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -2718,6 +2725,9 @@ body {
 .pt-5 {
   padding-top: 1.25rem;
 }
+.pt-0 {
+  padding-top: 0px;
+}
 .text-center {
   text-align: center;
 }
@@ -2730,6 +2740,10 @@ body {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 .text-lg {
   font-size: 1.125rem;
@@ -2748,6 +2762,10 @@ body {
 }
 .font-normal {
   font-weight: 400;
+}
+.text-\[\#b91c1c\] {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 .text-content3 {
   --tw-text-opacity: 1;
