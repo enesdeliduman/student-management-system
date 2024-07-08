@@ -18,7 +18,9 @@
                                                 <tr>
                                                     <th>Tarih</th>
                                                     <th>Açıklama</th>
-                                                    <th>Seçenekler</th>
+                                                    <% if (isAdmin) { %>
+                                                        <th>Seçenekler</th>
+                                                        <% } %>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -30,14 +32,16 @@
                                                         <td class="name">
                                                             <%= truancy.description %>
                                                         </td>
-                                                        <td class="max-w-min">
-                                                            <a class="link link-error link-ghost-error"
-                                                                href="/student/<%= truancy.id %>/truancie/delete">Devamsızlığı
-                                                                sil</a>
-                                                        </td>
-                                                        </tr>
-                                                        <% count++ %>
-                                                            <% }) %>
+                                                        <% if (isAdmin) { %>
+                                                            <td class="max-w-min">
+                                                                <a class="link link-error link-ghost-error"
+                                                                    href="/student/<%= truancy.id %>/truancie/delete">Devamsızlığı
+                                                                    sil</a>
+                                                            </td>
+                                                            <% } %>
+                                                                </tr>
+                                                                <% count++ %>
+                                                                    <% }) %>
                                             </tbody>
                                         </table>
                                     </div>

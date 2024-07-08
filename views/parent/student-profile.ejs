@@ -10,14 +10,9 @@
                         <a tabindex="-1" href="/student/<%= student.id %>/practice-exams"
                             class="dropdown-item text-start text-sm link link-primary link-ghost-primary">Deneme
                             sınavlarını görüntüle</a>
-                        <% if (isAdmin) { %>
-                            <a tabindex="-1" href="/student/<%= student.id %>/settings"
-                                class="dropdown-item text-start text-sm link link-error link-ghost-error">Ayarları
-                                görüntüle</a>
                             <a tabindex="-1" href="/student/<%= student.id %>/truancies"
                                 class="dropdown-item text-start text-sm link link-success link-ghost-success">Devamsızlıkları
                                 görüntüle</a>
-                            <% } %>
                     </div>
                 </div>
                 <% if (typeof alert !="undefined" ) { %>
@@ -80,30 +75,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <% if (student.parent) { %>
-                                    <div class="border rounded-lg p-4 overflow-x-auto">
-                                        <div class="flex flex-wrap space-x-8 text-nowrap items-center">
-                                            <div>
-                                                <div class="flex space-x-2">
-                                                    <p>Veli Adı:</p>
-                                                    <p class="text-md">
-                                                        <b>
-                                                            <%= student.parent.fullName %>
-                                                        </b>
-                                                    </p>
-                                                </div>
-                                                <div class="flex space-x-2">
-                                                    <p>Veli telefon no:</p>
-                                                    <p class="text-md">
-                                                        <b>
-                                                            <%= student.parent.telephoneNumber %>
-                                                        </b>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } %>
                             </div>
             </div>
             <%- include('../partials/_footer') -%>

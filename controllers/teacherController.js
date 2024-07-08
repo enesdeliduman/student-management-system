@@ -3,6 +3,7 @@ const Group = require("../models/Group");
 const Student = require("../models/Student");
 const Level = require("../models/Level");
 const Teacher = require("../models/Teacher");
+const Field = require("../models/Field");
 const Class = require("../models/Class");
 const User = require("../models/User");
 const Attendance = require("../models/Attendance");
@@ -74,7 +75,7 @@ module.exports.attendance = asyncHandler(async (req, res, next) => {
         }
     });
     const group = await Group.findByPk(groupId, {
-        attributes:["name"]
+        attributes: ["name"]
     })
     if (attendances.length >= 1) {
         confirm = "y"
@@ -125,3 +126,39 @@ module.exports.attendanceFinal = asyncHandler(async (req, res, next) => {
     }
     res.redirect(`/teacher/attendance/${req.params.groupId}?lesson=${lesson}`)
 });
+
+module.exports.groups = asyncHandler(async (req, res, next) => {
+    const groups = await Group.findAll({
+        teacherId: req.session.userId
+    })
+    res.render("admin/group", {
+        title: "Gruplarım",
+        groups: groups,
+    })
+});
+module.exports.group = asyncHandler(async (req, res, next) => {
+    const group = await Group.findByPk(req.params.id, {
+      include: [
+        {
+          model: Student,
+          attributes: ["fullName", "id"]
+        },
+        {
+          model: Level,
+          attributes: ["name"]
+        },
+        {
+          model: Class,
+          attributes: ["name"]
+        },
+        {
+          model: Field,
+          attributes: ["name"]
+        },
+      ]
+    })
+    res.render("admin/group", {
+        title: `Grup ${group.name}`,
+        group: group,
+    })
+  });

@@ -76,6 +76,11 @@ module.exports.createDummyData = async () => {
         roleId: roles[1].id
       },
       {
+        username: 'parent',
+        password: await bcrypt.hash('root', 10),
+        roleId: roles[3].id
+      },
+      {
         username: 'student',
         password: await bcrypt.hash('root', 10),
         roleId: roles[2].id

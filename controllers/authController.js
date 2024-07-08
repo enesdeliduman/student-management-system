@@ -20,7 +20,7 @@ module.exports.signInPost = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
   const user = await User.findOne({
     where: {
-      username: username,
+      username: username.trim(),
     },
     include: [
       {

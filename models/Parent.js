@@ -18,9 +18,6 @@ const Parent = sequelize.define("parent", {
             notEmpty: {
                 msg: "Telefon numarası boş olamaz"
             },
-            isNumeric: {
-                msg: "Telefon numarası sadece rakamlardan oluşmalıdır"
-            }
         }
     }
 });

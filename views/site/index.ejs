@@ -31,36 +31,47 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card bg-backgroundPrimary">
-                        <a href="/groups">
-                            <div class="card-body flex justify-between">
-                                <p>Gruplar</p>
-                                <p>
-                                    <%= groupCount %>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
                     <% } %>
-                        <% if (isTeacher || isAdmin) { %>
+                        <% if (isParent) { %>
                             <div class="card bg-backgroundPrimary">
-                                <a href="/teacher/attendance/groups">
+                                <a href="/parent/students">
                                     <div class="card-body flex justify-between">
-                                        <p>Yoklama al</p>
+                                        <p>
+                                            Öğrencilerim
+                                        </p>
                                     </div>
                                 </a>
                             </div>
                             <% } %>
-                            <br>
-                                <% if (isAdmin) { %>
-                                    <div class="card bg-primary text-whiteInverted">
-                                        <a href="/add">
+                                <% if (isTeacher || isAdmin) { %>
+                                    <div class="card bg-backgroundPrimary">
+                                        <a href="/teacher/attendance/groups">
                                             <div class="card-body flex justify-between">
-                                                <p>Yeni kayıt ekle</p>
+                                                <p>Yoklama al</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="card bg-backgroundPrimary">
+                                        <a href="/groups">
+                                            <div class="card-body flex justify-between">
+                                                <p>Gruplar</p>
+                                                <p>
+                                                    <%= groupCount %>
+                                                </p>
                                             </div>
                                         </a>
                                     </div>
                                     <% } %>
+                                        <br>
+                                        <% if (isAdmin) { %>
+                                            <div class="card bg-primary text-whiteInverted">
+                                                <a href="/add">
+                                                    <div class="card-body flex justify-between">
+                                                        <p>Yeni kayıt ekle</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <% } %>
             </div>
             <%- include('../partials/_footer') -%>
                 <%- include('../partials/_scripts') -%>

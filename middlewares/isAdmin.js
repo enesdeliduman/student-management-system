@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     return res.redirect('/auth/sign-in')
   }
   if (req.session.role != "Admin") {
-    return res.redirect("/")
+    return false
   }
   next();
 }

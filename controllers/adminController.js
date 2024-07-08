@@ -239,7 +239,7 @@ module.exports.attendancesConfirmPost = asyncHandler(async (req, res, next) => {
   const list = []
   for (let key in req.body) {
     if (key !== "_csrf") {
-      const desc = req.body[key]; // Öğrenci ID'si
+      const desc = req.body[key];
       const student = await Student.findByPk(key, {
         attributes: ["fullName"],
         include: {
@@ -549,7 +549,7 @@ module.exports.addStudentPost = asyncHandler(async (req, res, next) => {
   let student = await Student.create({
     fullName: studentFullName.toUpperCase(),
     tcNo: tc,
-    telephoneNumber: studentTelephoneNumber,
+    telephoneNumber: studentTelephoneNumber.trim(),
     dateOfBirth: studentBirthDate,
     groupId: groupId,
   })
