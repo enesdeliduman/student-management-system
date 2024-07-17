@@ -10,12 +10,12 @@ const isParent = require("../middlewares/isParent");
 router.get("/", isAuth, adminController.index);
 router.get("/students", isAdmin, adminController.students);
 router.get("/student/:id", isTeacher, adminController.student);
-router.get("/student/:id/practice-exams", isTeacher || isParent, adminController.studentPractices);
+router.get("/student/:id/practice-exams", isTeacher, adminController.studentPractices);
 router.get("/student/:id/settings", isAdmin, adminController.studentSettingsGet);
 router.post("/student/:id/settings", adminController.studentSettingsPost);
 router.get("/attendances/confirm", isAdmin, adminController.attendancesConfirmGet)
 router.post("/attendances/confirm", adminController.attendancesConfirmPost)
-router.get("/student/:id/truancies", isAdmin || isParent, adminController.studentTruancies);
+router.get("/student/:id/truancies", isAdmin, adminController.studentTruancies);
 router.get("/student/:id/truancie/delete", isAdmin, adminController.studentTruancieDelete);
 
 router.get("/teachers", isAdmin, adminController.teachers);

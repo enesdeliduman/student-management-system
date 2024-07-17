@@ -22,28 +22,28 @@ module.exports.createDummyData = async () => {
     await sequelize.sync({ force: true })
 
     const parents = await Parent.bulkCreate([
-      { fullName: 'Parent 1', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 2', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 3', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 4', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 4', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 5', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 6', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 7', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 8', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 9', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 10', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 11', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 12', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 13', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 14', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 14', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 15', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 16', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 17', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 18', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 19', telephoneNumber: "5419440253" },
-      { fullName: 'Parent 20', telephoneNumber: "5419440253" }
+      { fullName: 'Parent 1', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 2', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 3', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 4', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 4', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 5', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 6', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 7', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 8', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 9', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 10', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 11', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 12', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 13', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 14', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 14', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 15', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 16', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 17', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 18', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 19', telephoneNumber: "0000000000" },
+      { fullName: 'Parent 20', telephoneNumber: "0000000000" }
     ])
 
     const roles = await Role.bulkCreate([
@@ -88,16 +88,16 @@ module.exports.createDummyData = async () => {
     ])
 
     const teachers = await Teacher.bulkCreate([
-      { fullName: 'Teacher 1', telephoneNumber: '5419440253',dateOfBirth:'2003.02.02', userId: users[0].id },
-      { fullName: 'Teacher 2', telephoneNumber: '5419440253',dateOfBirth:'2003.02.02', userId: users[1].id },
-      { fullName: 'Teacher 3', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 4', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 5', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 6', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 7', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 8', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 9', telephoneNumber: '5419440253' ,dateOfBirth:'2003.02.02'},
-      { fullName: 'Teacher 10', telephoneNumber: '5419440253',dateOfBirth:'2003.02.02' }
+      { fullName: 'Teacher 1', telephoneNumber: '0000000000',dateOfBirth:'2003.02.02', userId: users[0].id },
+      { fullName: 'Teacher 2', telephoneNumber: '0000000000',dateOfBirth:'2003.02.02', userId: users[1].id },
+      { fullName: 'Teacher 3', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 4', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 5', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 6', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 7', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 8', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 9', telephoneNumber: '0000000000' ,dateOfBirth:'2003.02.02'},
+      { fullName: 'Teacher 10', telephoneNumber: '0000000000',dateOfBirth:'2003.02.02' }
     ])
 
     const classes = await Class.bulkCreate([
@@ -142,24 +142,24 @@ module.exports.createDummyData = async () => {
 
     const students = await Student.bulkCreate([
       { fullName: 'Enes Deliduman', photo: 'student1.jpg', userId: users[2].id },
-      { fullName: 'Bedriye Şimşek', photo: 'photo1.jpg' },
-      { fullName: 'Yunuscan Acar', photo: 'photo1.jpg' },
-      { fullName: 'Sinem Baş', photo: 'photo1.jpg' },
-      { fullName: 'Sibel Akyıldız', photo: 'photo1.jpg' },
-      { fullName: 'Merve Kara', photo: 'photo1.jpg' },
-      { fullName: 'Emir Bıçakçı', photo: 'photo2.jpg' },
-      { fullName: 'Büşra Yavuz', photo: 'photo2.jpg' },
-      { fullName: 'Sevcan Kılıç', photo: 'photo2.jpg' },
-      { fullName: 'Batuhan Özkan', photo: 'photo2.jpg' },
-      { fullName: 'Melek Sıla Ekiz', photo: 'photo1.jpg' },
-      { fullName: 'Merve Acar', photo: 'photo1.jpg' },
-      { fullName: 'Samet Karayüz', photo: 'photo1.jpg' },
-      { fullName: 'Agop Malermeni', photo: 'photo1.jpg' },
-      { fullName: 'Hasan Kaya', photo: 'photo1.jpg' },
-      { fullName: 'Mustafa Kemal Güzelad', photo: 'photo2.jpg' },
-      { fullName: 'Zerrin Paşazade', photo: 'photo2.jpg' },
-      { fullName: 'Kerim Arabacı', photo: 'photo2.jpg' },
-      { fullName: 'Mert Ulak', photo: 'photo2.jpg' }
+      { fullName: 'Student 1', photo: 'photo1.jpg' },
+      { fullName: 'Student 2', photo: 'photo1.jpg' },
+      { fullName: 'Student 3', photo: 'photo1.jpg' },
+      { fullName: 'Student 4', photo: 'photo1.jpg' },
+      { fullName: 'Student 5', photo: 'photo1.jpg' },
+      { fullName: 'Student 6', photo: 'photo2.jpg' },
+      { fullName: 'Student 7', photo: 'photo2.jpg' },
+      { fullName: 'Student 8', photo: 'photo2.jpg' },
+      { fullName: 'Student 9', photo: 'photo2.jpg' },
+      { fullName: 'Student 10', photo: 'photo1.jpg' },
+      { fullName: 'Student 11', photo: 'photo1.jpg' },
+      { fullName: 'Student 12', photo: 'photo1.jpg' },
+      { fullName: 'Student 13', photo: 'photo1.jpg' },
+      { fullName: 'Student 14', photo: 'photo1.jpg' },
+      { fullName: 'Student 15', photo: 'photo2.jpg' },
+      { fullName: 'Student 16', photo: 'photo2.jpg' },
+      { fullName: 'Student 17', photo: 'photo2.jpg' },
+      { fullName: 'Student 18', photo: 'photo2.jpg' }
     ])
     const lessons = await Lesson.bulkCreate([
       { name: 'Lesson 1' },

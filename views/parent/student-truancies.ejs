@@ -1,0 +1,55 @@
+<%- include('../partials/_head') -%>
+
+    <body class="bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+
+            <!-- Table -->
+            <% if (truancies.length==0) { %>
+                <%- include('../partials/_noData') -%>
+                    <% } else { %>
+
+
+                        <% if (typeof alert !="undefined" ) { %>
+                            <%- include('../partials/_alert',alert) -%>
+                                <% } %>
+                                    <div class="flex min-w-full mt-4 overflow-x-auto justify-center">
+                                        <table class="table-compact table max-w-8xl ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tarih</th>
+                                                    <th>Açıklama</th>
+                                                    <% if (isAdmin) { %>
+                                                        <th>Seçenekler</th>
+                                                        <% } %>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% let count=0 %>
+                                                    <% truancies.forEach(truancy=> { %>
+                                                        <td class="name">
+                                                            <%= truancy.date %>
+                                                        </td>
+                                                        <td class="name">
+                                                            <%= truancy.description %>
+                                                        </td>
+                                                        <% if (isAdmin) { %>
+                                                            <td class="max-w-min">
+                                                                <a class="link link-error link-ghost-error"
+                                                                    href="/student/<%= truancy.id %>/truancie/delete">Devamsızlığı
+                                                                    sil</a>
+                                                            </td>
+                                                            <% } %>
+                                                                </tr>
+                                                                <% count++ %>
+                                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
+
+                                        <%- include('../partials/_pagination') -%>
+                                            <%- include('../partials/_footer') -%>
+                                                <%- include('../partials/_scripts') -%>
+    </body>
+
+    </html>

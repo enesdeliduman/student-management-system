@@ -1,0 +1,430 @@
+<%- include('../partials/_head') -%>
+
+    <body class="auto bg-backgroundSecondary py-4 rounded-lg px-6">
+        <%- include('../partials/_navbar') -%>
+            <!-- Filter and Search -->
+            <div class="auto w-full flex md:space-x-4 space-x-2 mb-4 justify-end">
+                <form action="get">
+                    <select class="auto select" id="selected">
+                        <option value="default" <%=(filter==="default" )? "selected" :"" %>>Tümü</option>
+                        <option value="tytHigh" <%=(filter==="tytHigh" )? "selected" :"" %>>TYT - (En yüksek net)
+                        </option>
+                        <option value="aytHigh" <%=(filter==="aytHigh" )? "selected" :"" %>>AYT - (En yüksek net)
+                        </option>
+                    </select>
+                </form>
+            </div>
+            <!-- Datas -->
+            <% if (practices.length==0) { %>
+                <%- include('../partials/_noData') -%>
+                    <% } else { %>
+
+                        <div class="accordion-group accordion-group-hover accordion-group-bordered">
+                            <% practices.forEach((practice,index)=> { %>
+                                <div class="accordion">
+                                    <input type="checkbox" id="toggle-<%= index%>" class="auto accordion-toggle" />
+                                    <label for="toggle-<%= index%>" class="auto accordion-title">
+                                        <span>
+                                            <%= practice.type %> - <%= practice.name %>
+                                        </span>
+                                        <span class="auto text-sm text-content3 font-normal">Tarihi: <b>
+                                                <%= practice.practiceDate %>
+                                            </b>
+                                        </span>
+                                    </label>
+                                    <div class="accordion-content">
+                                        <div class="overflow-x-auto min-h-0">
+                                            <div class="">
+                                                <table
+                                                    class="auto table table-compact table-zebra border-collapse w-full">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ders</th>
+                                                            <th>Doğru</th>
+                                                            <th>Yanlış</th>
+                                                            <th>Boş</th>
+                                                            <th>Net</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <% if (practice.type=="TYT" ) { %>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Türkçe</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.turkish.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.turkish.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.turkish.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.turkish.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Temel Matematik</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.mathematics.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.mathematics.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.mathematics.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.mathematics.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Tarih</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.history.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.history.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.history.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.history.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Din Kültürü ve Ahlak
+                                                                    Bilgisi</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.religiousCulture.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.religiousCulture.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.religiousCulture.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.religiousCulture.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Coğrafya</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.geography.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.geography.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.geography.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.geography.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Felsefe</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.philosophy.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.philosophy.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.philosophy.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.social.philosophy.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Biyoloji</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.biology.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.biology.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.biology.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.biology.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Kimya</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.chemistry.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.chemistry.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.chemistry.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.chemistry.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border">Fizik</td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.physics.trueQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.physics.falseQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.physics.blankQ %>
+                                                                </td>
+                                                                <td class="auto px-4 py-2 border">
+                                                                    <%= practice.science.physics.net %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="auto px-4 py-2 border"><b>TOPLAM</b></td>
+                                                                <td class="auto px-4 py-2 border"><b>
+                                                                        <%= practice.totalTrue %>
+                                                                    </b></td>
+                                                                <td class="auto px-4 py-2 border"><b>
+                                                                        <%= practice.totalFalse %>
+                                                                    </b></td>
+                                                                <td class="auto px-4 py-2 border"><b>
+                                                                        <%= practice.totalBlank %>
+                                                                    </b></td>
+                                                                <td class="auto px-4 py-2 border"><b>
+                                                                        <%= practice.totalNet %>
+                                                                    </b></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <% } else { %>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Türk Dili ve
+                                                                        Edebiyatı
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.TurkishLanguageAndLiterature.trueQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.TurkishLanguageAndLiterature.falseQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.TurkishLanguageAndLiterature.blankQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.TurkishLanguageAndLiterature.net
+                                                                            %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Tarih - 1</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.history1.trueQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.history1.falseQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.history1.blankQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.history1.net
+                                                                            %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Coğrafya - 1</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.geography1.trueQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.geography1.falseQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.geography1.blankQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.TurkishLanguageAndLiteratureSocialSciences1.socialScience1.geography1.net
+                                                                            %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Matematik</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.mathematics.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.mathematics.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.mathematics.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.mathematics.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Tarih - 2</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.history2.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.history2.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.history2.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.history2.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Coğrafya - 2</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.geography2.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.geography2.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.geography2.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.geography2.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Felsefe</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.philosophy.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.philosophy.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.philosophy.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.philosophy.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Din Kültürü ve
+                                                                        Ahlak
+                                                                        Bilgisi</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.religiousCulture.trueQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.religiousCulture.falseQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.religiousCulture.blankQ
+                                                                            %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.socialScience2.religiousCulture.net
+                                                                            %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Biyoloji</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.biology.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.biology.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.biology.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.biology.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Kimya</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.chemistry.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.chemistry.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.chemistry.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.chemistry.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border">Fizik</td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.physics.trueQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.physics.falseQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.physics.blankQ %>
+                                                                    </td>
+                                                                    <td class="auto px-4 py-2 border">
+                                                                        <%= practice.science.physics.net %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="auto px-4 py-2 border"><b>TOPLAM</b></td>
+                                                                    <td class="auto px-4 py-2 border"><b>
+                                                                            <%= practice.totalTrue %>
+                                                                        </b></td>
+                                                                    <td class="auto px-4 py-2 border"><b>
+                                                                            <%= practice.totalFalse %>
+                                                                        </b></td>
+                                                                    <td class="auto px-4 py-2 border"><b>
+                                                                            <%= practice.totalBlank %>
+                                                                        </b></td>
+                                                                    <td class="auto px-4 py-2 border"><b>
+                                                                            <%= practice.totalNet %>
+                                                                        </b></td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <% } %>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } %>
+                            <%- include('../partials/_pagination') -%>
+                                <%- include('../partials/_footer') -%>
+                                    <%- include('../partials/_scripts') -%>
+                                        <script>
+                                            const selected = document.querySelector("#selected")
+                                            selected.addEventListener("change", () => {
+                                                newURL(selected.value)
+                                            })
+                                            function newURL(value) {
+                                                let url = new URL(window.location.href);
+                                                newURL = window.location.href = window.location.origin + window.location.pathname + "?filter=" + value
+                                            }
+                                        </script>
+    </body>
+
+    </html>
